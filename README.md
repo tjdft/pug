@@ -10,16 +10,16 @@ PUG is a frontend app only. It intends exclusively to display dashboards on your
 
 **Quality** 
 
-![sonar.png](sonar.png)
+![sonar.png](https://raw.githubusercontent.com/tjdft/pug/master/sonar.png)
 
 **Proactive maintenance**  
 
-![sentry.png](sentry.png)
+![sentry.png](https://raw.githubusercontent.com/tjdft/pug/master/sentry.png)
 
 
 **Availability** 
 
-![openshift.png](openshift.png)
+![openshift.png](https://raw.githubusercontent.com/tjdft/pug/master/openshift.png)
 
 ## LOCAL SETUP
 
