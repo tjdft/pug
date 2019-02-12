@@ -17,8 +17,8 @@ ENV SENTRY_URL=$SENTRY_URL
 ENV HOST 0.0.0.0
 
 # Copy critical files (cached docker layers)
-COPY package.json /var/www/web/
 COPY yarn.lock /var/www/web/
+COPY .env.example /var/www/web
 
 # Create .env file from example
 RUN mv .env.example .env
