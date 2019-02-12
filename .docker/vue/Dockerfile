@@ -20,6 +20,9 @@ ENV HOST 0.0.0.0
 COPY package.json /var/www/web/
 COPY yarn.lock /var/www/web/
 
+# Create .env file from example
+RUN mv .env.example .env
+
 # Install dependencies
 RUN yarn install
 
