@@ -80,10 +80,10 @@ By default, some services like Openshift and Sonar does not have CORS enabled by
 
 ## PRODUCTION SETUP
 
+
 ### Build
 
 It is highly recommend do not commit `.env` to your repository.  In order to keep API KEYS in safe, you should provide them as environment variables (Ex: Gitlab CI) before building.
-
 
 
 ```

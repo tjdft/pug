@@ -1,0 +1,18 @@
+#####################################
+### FOR DEVELOPMENT PURPOSES ONLY ###
+#####################################
+
+version: '3'
+
+services:
+  ######## VUE  ########
+  vue:
+    user: root
+    image: tjdft/vue-ssr:latest
+    environment: 
+        - HOST=0.0.0.0        
+    volumes:
+      - ../:/var/www/web:cached      
+    entrypoint: /bin/bash -c "echo 'Done! keep bash running :)' && tail -F /dev/null"
+    ports:
+     - 3000:3000     
