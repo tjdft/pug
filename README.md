@@ -8,56 +8,42 @@ PUG is a frontend app only. It intends exclusively to display dashboards on your
 
 ## DASHBOARDS
 
-**Quality** 
+### Quality
 
 ![sonar.png](https://raw.githubusercontent.com/tjdft/pug/master/sonar.png)
 
-**Proactive maintenance**  
+- **red**: there is at least one "bug"
+- **yellow**: zero "bugs", but at least one "vulnerability" or "code smell"
+- **green**: all fine!
+- **grey**: metrics not configured
+
+### Proactive maintenance  
 
 ![sentry.png](https://raw.githubusercontent.com/tjdft/pug/master/sentry.png)
 
+- **red**: it has "unsolved issues" by last 14 days
+- **green**: all fine!
 
-**Availability** 
+### Availability 
 
 ![openshift.png](https://raw.githubusercontent.com/tjdft/pug/master/openshift.png)
 
+- **red**: there are some "red pods"
+- **gray**: there are some pods down
+- **green**: all fine!
+
 ## LOCAL SETUP
 
-- Clone this repository
+- Clone this repository.
 
-- Create a `.env` file from example
+- Create a `.env` file from example and configure the environment variables.
 
 ```bash
 mv .env.example .env
 ```
 
-- Configure the environment variables
 
-```bash
-# Startup mode
-TV_MODE=false
-
-# How much time each panel should display
-TV_TRANSITION_INTERVAL=30000 
-
-# Openshift 
-OPENSHIFT_URL=https://openshift.company.com
-OPENSHIFT_TOKEN=
-OPENSHIFT_REFRESH_INTERVAL=60000
-
-# Sonar
-SONAR_URL=https://sonar.company.com
-SONAR_TOKEN=
-SONAR_REFRESH_INTERVAL=60000
-
-# Sentry
-SENTRY_URL=http://sentry.company.com
-SENTRY_TOKEN=
-SENTRY_REFRESH_INTERVAL=60000
-
-```
-
-- Install dependencies and start up local server
+- Install dependencies and start up local server.
 
 ``` bash
 # install dependencies
@@ -67,29 +53,21 @@ $ yarn install
 $ yarn dev
 ```
 
+## PRODUCTION SETUP
+
+
 ### API Keys
 
-Note that is necessary an API KEY for each service. So, only projects binded to that user (who own the API KEY) will be displayed on dashboards.
+Note that is necessary an API KEY for each service (`.env` file). So, only projects binded to that user (who own the API KEY) will be displayed on dashboards.
 
 It is highly recommend to use API KEYS with readonly permissions. 
+
+It is highly recommend **do not commit** the `.env` file into your repository.  In order to keep API KEYS in safe, you should provide them as environment variables (Ex: Gitlab CI) before building.
 
 
 ### Proxy
 
-By default, some services like Openshift and Sonar does not have CORS enabled by default. So, PUG uses `@nuxtjs/proxy` module to avoid CORS issues. Internal requests to paths like `'/openshift'`  will be rewrited to actual external Openshift API url.
-
-## PRODUCTION SETUP
-
-
-### Build
-
-It is highly recommend do not commit `.env` to your repository.  In order to keep API KEYS in safe, you should provide them as environment variables (Ex: Gitlab CI) before building.
-
-
-```
-# all needed environment variables must be avaliable at this point
-yarn build
-```
+By default, some services like Openshift and Sonar does not have CORS enabled by default. So, PUG uses `@nuxtjs/proxy` module to avoid CORS issues. Internal requests, for instance, to paths like `'/openshift/'`  will be rewrited to actual external Openshift API url.
 
 
 ### Server
@@ -106,7 +84,7 @@ server {
     sendfile on;
     port_in_redirect off;
 
-    root /var/www/dist;
+    root /var/www/web/dist;
     index index.html;
 
     location / {         
@@ -116,6 +94,12 @@ server {
     }
 }
 [...]
+```
+
+Build it
+
+```
+yarn build
 ```
 
 
