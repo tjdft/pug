@@ -4,7 +4,7 @@
       flat
       height="100%"
       :color="color"
-      :href="`${SONAR_URL}/dashboard?id=${project.key}`"
+      :href="`${$env.SONAR_URL}/dashboard?id=${project.key}`"
       target="_blank"
     >
       <v-card-text class="py-2">
@@ -56,9 +56,6 @@ export default {
     }
   },
   computed: {
-    SONAR_URL() {
-      return process.env.SONAR_URL
-    },
     color() {
       if (this.project.metrics.bugs === null) return 'blue-grey lighten-1'
 

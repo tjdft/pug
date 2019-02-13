@@ -4498,6 +4498,11 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
+nuxt-env@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/nuxt-env/-/nuxt-env-0.0.4.tgz#5cc13436d2745da1d180f02910b7a2c7171e540c"
+  integrity sha512-MUID78H+U58ZUyFLsvPXggOWwrWvUnmmsj+VpJy+F9sPixO2QSiBENMN7msoE8Zz+A8Z+PMhfYlv1j1B4wuX9g==
+
 nuxt@^2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.4.3.tgz#1584fbbaed2bfb4839da2298c00bdcac2d71dcdd"

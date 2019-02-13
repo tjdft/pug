@@ -3,7 +3,7 @@
     :color="color"
     dark
     flat
-    :href="`${OPENSHIFT_URL}/console/project/${project.metadata.name}`"
+    :href="`${$env.OPENSHIFT_URL}/console/project/${project.metadata.name}`"
     target="_blank"
   >
     <v-card-title>
@@ -17,11 +17,6 @@ export default {
     project: {
       type: Object,
       required: true
-    }
-  },
-  data() {
-    return {
-      OPENSHIFT_URL: process.env.OPENSHIFT_URL
     }
   },
   computed: {

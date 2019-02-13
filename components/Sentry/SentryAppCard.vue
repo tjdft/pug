@@ -1,5 +1,5 @@
 <template>
-  <v-card :color="color" dark flat :href="`${SENTRY_URL}/sentry/${project.slug}`" target="_blank">
+  <v-card :color="color" dark flat :href="`${$env.SENTRY_URL}/sentry/${project.slug}`" target="_blank">
     <v-card-text class="py-2">
       <div class="text-truncate white--text pb-2">
         <strong>{{ project.name }}</strong>
@@ -21,11 +21,6 @@ export default {
     project: {
       type: Object,
       required: true
-    }
-  },
-  data() {
-    return {
-      SENTRY_URL: process.env.SENTRY_URL
     }
   },
   computed: {

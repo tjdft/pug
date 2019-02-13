@@ -3,7 +3,7 @@ const pkg = require('./package')
 require('dotenv').config()
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
 
   /*
   ** Headers of the page
@@ -24,15 +24,7 @@ module.exports = {
       }
     ]
   },
-  env: {
-    TV_MODE: process.env.TV_MODE,
-    OPENSHIFT_TOKEN: process.env.OPENSHIFT_TOKEN,
-    SONAR_TOKEN: process.env.SONAR_TOKEN,
-    SENTRY_TOKEN: process.env.SENTRY_TOKEN,
-    OPENSHIFT_URL: process.env.OPENSHIFT_URL,
-    SONAR_URL: process.env.SONAR_URL,
-    SENTRY_URL: process.env.SENTRY_URL
-  },
+
   /*
   ** Customize the progress-bar color
   */
@@ -52,16 +44,33 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    [
+      // All env vars are loaded through `@nuxtjs/dotenv` module.
+      // But, some can be replaced at run time through `nuxt-env` module
+      // In pages/components use `this.$env.VAR_NAME` instead of `process.env.VAR_NAME`
+      'nuxt-env',
+      {
+        keys: [
+          'TV_MODE',
+          'TV_TRANSITION_INTERVAL',
+          'OPENSHIFT_URL',
+          'OPENSHIFT_REFRESH_INTERVAL',
+          'SENTRY_URL',
+          'SENTRY_REFRESH_INTERVAL',
+          'SONAR_URL',
+          'SONAR_REFRESH_INTERVAL'
+        ]
+      }
+    ]
   ],
 
-  /**
-   * Toast module configuration
-   */
+  /*
+  ** Toast module configuration
+  */
   toast: {
     duration: 5000,
     icon: 'notifications',
@@ -73,7 +82,6 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
     credentials: true,
     proxy: true
   },
@@ -81,7 +89,6 @@ module.exports = {
   /*
   ** Proxy module configuration
   */
-
   proxy: {
     '/sonar/': {
       target: `${process.env.SONAR_URL}/api`,

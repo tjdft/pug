@@ -131,7 +131,7 @@ export default {
 
     setInterval(() => {
       this.refresh()
-    }, process.env.SONAR_REFRESH_INTERVAL)
+    }, this.$env.SONAR_REFRESH_INTERVAL)
   },
   methods: {
     async refresh() {
@@ -143,7 +143,7 @@ export default {
         console.log(error)
 
         let msg = error.response ? error.response.data : error.message
-        msg += `. Retrying again in ${process.env.OPENSHIFT_REFRESH_INTERVAL /
+        msg += `. Retrying again in ${this.$env.OPENSHIFT_REFRESH_INTERVAL /
           1000} seconds (failed retries: ${++this.retries}).`
 
         this.error = msg

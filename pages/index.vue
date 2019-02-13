@@ -63,7 +63,7 @@ export default {
       if (this.$store.state.tv_mode) {
         this.next()
       }
-    }, process.env.TV_TRANSITION_INTERVAL)
+    }, this.$env.TV_TRANSITION_INTERVAL)
   },
   methods: {
     next() {
