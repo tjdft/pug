@@ -10,7 +10,7 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit({ commit }) {
-    commit('SET_TV_MODE', this.$env.TV_MODE)
+    commit('SET_TV_MODE', this.$env.TV_MODE === 'true')
   },
 
   toogle_tv_mode({ commit, state }) {

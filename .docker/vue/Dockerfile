@@ -19,3 +19,5 @@ COPY --chown=appuser:appuser . /var/www/web/
 # "yarn build" generates /var/www/web/dist, that is served by Nginx (from base image)
 RUN yarn build
 
+CMD ["/bin/sh", "-c", "nginx && yarn start"] 
+

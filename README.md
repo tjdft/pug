@@ -5,28 +5,24 @@ It will remind you every day  what is essential about your products: **quality**
 
 PUG is a frontend app only. It intends exclusively to display dashboards on your TV. **So, you will not receive email notifications about your services.**
 
+![pug.gif](https://raw.githubusercontent.com/tjdft/pug/master/pug.gif)
 
 ## DASHBOARDS
 
-### Quality
-
-![sonar.png](https://raw.githubusercontent.com/tjdft/pug/master/sonar.png)
+### SonarQube
 
 - **red**: there is at least one "bug"
 - **yellow**: zero "bugs", but at least one "vulnerability" or "code smell"
 - **green**: all fine!
 - **grey**: metrics not configured
 
-### Proactive maintenance  
+### Sentry
 
-![sentry.png](https://raw.githubusercontent.com/tjdft/pug/master/sentry.png)
 
 - **red**: it has "unsolved issues" by last 14 days
 - **green**: all fine!
 
-### Availability 
-
-![openshift.png](https://raw.githubusercontent.com/tjdft/pug/master/openshift.png)
+### Openshift 
 
 - **red**: there are some "red pods"
 - **gray**: there are some pods down
@@ -34,12 +30,35 @@ PUG is a frontend app only. It intends exclusively to display dashboards on your
 
 ## LOCAL SETUP
 
-- Clone this repository.
-
-- Create a `.env` file from example and configure the environment variables.
+Create a `.env` file from `.env.example `
 
 ```bash
 mv .env.example .env
+```
+
+Configure the environment variables.
+
+```bash
+# Startup mode
+TV_MODE=false
+
+# How much time each panel should display
+TV_TRANSITION_INTERVAL=15000 
+
+# Openshift 
+OPENSHIFT_URL=https://openshift.company.com
+OPENSHIFT_TOKEN=
+OPENSHIFT_REFRESH_INTERVAL=60000
+
+# Sonar
+SONAR_URL=https://sonar.company.com
+SONAR_TOKEN=
+SONAR_REFRESH_INTERVAL=60000
+
+# Sentry
+SENTRY_URL=http://sentry.company.com
+SENTRY_TOKEN=
+SENTRY_REFRESH_INTERVAL=60000
 ```
 
 
@@ -67,7 +86,7 @@ It is highly recommend **do not commit** the `.env` file into your repository.  
 
 ### Proxy
 
-By default, some services like Openshift and Sonar does not have CORS enabled by default. So, PUG uses `@nuxtjs/proxy` module to avoid CORS issues. Internal requests, for instance, to paths like `'/openshift/'`  will be rewrited to actual external Openshift API url.
+By default, some services like Openshift and Sonar does not have CORS enabled by default. So, PUG uses `@nuxtjs/proxy` module to avoid CORS issues. Internal requests to paths like, e.g, `'/openshift/oapi/v1/projects'`  will be rewrited to actual external Openshift API url (`https://openshift.company.com/oapi/v1/projects`).
 
 
 ### Deploy manually
@@ -124,7 +143,6 @@ This is the simplest strategy to deploy.
 
 - Pull `tjdft/pug:<version>` image 
 - Setup necessary environment variables.
-- Setup container startup command (edit YAML) : `nginx && yarn start` 
 - You are done!
 
 Because PUG runs in universal mode (SSR), environment variables will be replaced at runtime.
