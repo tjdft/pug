@@ -90,14 +90,13 @@
 
 <script>
 // MODELS
-import Project from '@/models/sonar/Project'
+import Project from '@/dashboards/sonar/models/Project'
 
 // COMPONENTS
-import SonarAppCard from '@/components/Sonar/SonarAppCard'
-import SonarDataTable from '@/components/Sonar/SonarDataTable'
+import SonarAppCard from '@/dashboards/sonar/components/SonarAppCard'
 
 export default {
-  components: { SonarAppCard, SonarDataTable },
+  components: { SonarAppCard },
   data() {
     return {
       projects: [],

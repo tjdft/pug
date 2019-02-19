@@ -2,7 +2,7 @@
   <v-content>
     <v-layout row wrap>
       <v-flex>
-        <img src="sentry.png" height="32" class="mb-3">
+        <img src="openshift.png" height="32" class="mb-3">
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
         <v-text-field
@@ -19,8 +19,8 @@
         {{ error }}
       </v-alert>
       <v-layout row wrap>
-        <v-flex v-for="project in projectList" :key="project.id" lg3 xs12>
-          <sentry-app-card :project="project" />
+        <v-flex v-for="project in projectList" :key="project.metadata.uid" lg3 xs12>
+          <openshift-app-card :project="project" />
         </v-flex>
       </v-layout>
       <v-progress-linear v-if="projectList.length === 0 && !searchTerm && !error" indeterminate />
@@ -39,7 +39,15 @@
         <strong>all fine</strong>
       </small>
       <small class="error--text pr-2">
-        <strong>has unsolved issues</strong>
+        <strong>something down</strong>
+      </small>
+      
+      <small class="blue-grey--text text--lighten-1 pr-2">
+        <strong>something off</strong>
+      </small>
+      
+      <small class="blue-grey--text text--lighten-3">
+        <strong>no deployments</strong>
       </small>
     </div>
   </v-content>
@@ -47,13 +55,13 @@
 
 <script>
 // MODELS
-import Project from '@/models/sentry/Project'
+import Project from '@/dashboards/openshift/models/Project'
 
 // COMPONENTS
-import SentryAppCard from '@/components/Sentry/SentryAppCard'
+import OpenshiftAppCard from '@/dashboards/openshift/components/OpenshiftAppCard'
 
 export default {
-  components: { SentryAppCard },
+  components: { OpenshiftAppCard },
   data() {
     return {
       projects: [],
@@ -66,7 +74,9 @@ export default {
   computed: {
     projectList() {
       return this.projects.filter(project =>
-        project.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        project.metadata.annotations['openshift.io/display-name']
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase())
       )
     }
   },
@@ -75,7 +85,7 @@ export default {
 
     setInterval(() => {
       this.refresh()
-    }, this.$env.SENTRY_REFRESH_INTERVAL)
+    }, this.$env.OPENSHIFT_REFRESH_INTERVAL)
   },
   methods: {
     async refresh() {
@@ -87,7 +97,7 @@ export default {
         console.log(error)
 
         let msg = error.response ? error.response.data : error.message
-        msg += `. Retrying again in ${this.$env.SENTRY_REFRESH_INTERVAL /
+        msg += `. Retrying again in ${this.$env.OPENSHIFT_REFRESH_INTERVAL /
           1000} seconds (failed retries: ${++this.retries}).`
 
         this.error = msg

@@ -57,6 +57,7 @@ module.exports = {
         keys: [
           'TV_MODE',
           'TV_TRANSITION_INTERVAL',
+          'TV_DASHBOARDS',
           'OPENSHIFT_URL',
           'OPENSHIFT_REFRESH_INTERVAL',
           'SENTRY_URL',
