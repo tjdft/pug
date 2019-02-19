@@ -7,15 +7,17 @@ export default class Project extends Model {
     return this.$axios
       .$get(`/sentry/api/0/organizations/sentry/`)
       .then(response => {
-        return response.projects.map(project => {
-          const p = new this(project)
+        return response.projects
+          .sort((a, b) => (a.slug > b.slug ? 1 : -1))
+          .map(project => {
+            const p = new this(project)
 
-          p._issues().then(response => {
-            p.issues = response
+            p._issues().then(response => {
+              p.issues = response
+            })
+
+            return p
           })
-
-          return p
-        })
       })
   }
 

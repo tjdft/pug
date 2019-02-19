@@ -50,7 +50,7 @@ module.exports = {
     '@nuxtjs/toast',
     [
       // All env vars are loaded through `@nuxtjs/dotenv` module.
-      // But, some can be replaced at run time through `nuxt-env` module
+      // But, all variables listed here can be replaced at run time through `nuxt-env` module
       // In pages/components use `this.$env.VAR_NAME` instead of `process.env.VAR_NAME`
       'nuxt-env',
       {
