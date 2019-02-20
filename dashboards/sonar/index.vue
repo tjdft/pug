@@ -6,13 +6,13 @@
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3>
         <v-select
-          v-model="selectedTags"
+          :value="$store.state.tags.sonar"
           :items="tags"
           label="tags"
           prepend-inner-icon="label"
           class="mt-0 pt-0 mb-3 mr-2"
           clearable
-          hide-details          
+          hide-details
           multiple
           single-line
           @input="setTags"
@@ -20,7 +20,7 @@
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
         <v-text-field
-          v-model="searchTerm"
+          :value="$store.state.search.sonar"
           label="search"
           hide-details
           prepend-inner-icon="search"
@@ -39,8 +39,14 @@
           <sonar-app-card :project="project" />
         </v-flex>
       </v-layout>
-      <v-progress-linear v-if="projectList.length === 0 && !searchTerm && selectedTags.length === 0 && !error" indeterminate />
-      <div v-if="projectList.length === 0 && (searchTerm || selectedTags.length > 0)" class="display-1 ma-5 text-xs-center">
+      <v-progress-linear
+        v-if="projectList.length === 0 && !$store.state.search.sonar && $store.state.tags.sonar.length === 0 && !error"
+        indeterminate
+      />
+      <div
+        v-if="projectList.length === 0 && ($store.state.search.sonar || $store.state.tags.sonar.length > 0)"
+        class="display-1 ma-5 text-xs-center"
+      >
         Nothing here.
       </div>
     </v-container>
@@ -104,8 +110,6 @@ export default {
       projects: [],
       error: null,
       last_update: new Date(),
-      searchTerm: '',
-      selectedTags: [],
       retries: 0
     }
   },
@@ -113,8 +117,10 @@ export default {
     projectList() {
       return this.projects.filter(
         project =>
-          project.tags.join(',').includes(this.selectedTags) &&
-          project.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+          project.tags.join(',').includes(this.$store.state.tags.sonar) &&
+          project.name
+            .toLowerCase()
+            .includes(this.$store.state.search.sonar.toLowerCase())
       )
     },
     tags() {
@@ -142,8 +148,6 @@ export default {
         this.projects = await Project.all()
         this.last_update = new Date()
       } catch (error) {
-        console.log(error)
-
         let msg = error.response ? error.response.data : error.message
         msg += `. Retrying again in ${this.$env.OPENSHIFT_REFRESH_INTERVAL /
           1000} seconds (failed retries: ${++this.retries}).`

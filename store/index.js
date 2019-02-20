@@ -4,8 +4,16 @@ export const state = () => ({
   tv_mode: process.env.TV_MODE,
   tv_dashboards: process.env.TV_DASHBOARDS,
   tv_layout: process.env.TV_LAYOUT,
-  tags: {},
-  search: {}
+  tags: {
+    sonar: [],
+    sentry: [],
+    openshift: []
+  },
+  search: {
+    sonar: '',
+    sentry: '',
+    openshift: ''
+  }
 })
 
 export const mutations = {
@@ -38,8 +46,19 @@ export const actions = {
     commit('SET_TV_LAYOUT', this.$env.TV_LAYOUT)
 
     const dashboards = this.$env.TV_DASHBOARDS.replace(/ /g, '').split(',')
-
     commit('SET_TV_DASHBOARDS', dashboards)
+
+    const query = qs.parse(this.$router.history.current.query)
+
+    if (Object.keys(query).length === 0) return
+
+    Object.keys(query.tags).forEach(tag => {
+      commit('SET_TAGS', { [tag]: query.tags[`${tag}`] })
+    })
+
+    Object.keys(query.search).forEach(search => {
+      commit('SET_SEARCH', { [search]: query.search[`${search}`] })
+    })
   },
 
   toogle_tv_mode({ commit, state }) {

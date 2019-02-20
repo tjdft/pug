@@ -6,7 +6,7 @@
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3>
         <v-select
-          v-model="selectedTags"
+          :value="$store.state.tags.sentry"
           :items="tags"
           label="tags"
           prepend-inner-icon="label"
@@ -20,7 +20,7 @@
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
         <v-text-field
-          v-model="searchTerm"
+          :value="$store.state.search.sentry"
           label="search"
           hide-details
           prepend-inner-icon="search"
@@ -38,8 +38,8 @@
           <sentry-app-card :project="project" />
         </v-flex>
       </v-layout>
-      <v-progress-linear v-if="projectList.length === 0 && !searchTerm && selectedTags.length === 0 && !error" indeterminate />
-      <div v-if="projectList.length === 0 && (searchTerm || selectedTags.length > 0)" class="display-1 ma-5 text-xs-center">
+      <v-progress-linear v-if="projectList.length === 0 && !$store.state.search.sentry && $store.state.tags.sentry.length === 0 && !error" indeterminate />
+      <div v-if="projectList.length === 0 && ($store.state.search.sentry || $store.state.tags.sentry.length > 0)" class="display-1 ma-5 text-xs-center">
         Nothing here.
       </div>
     </v-container>
@@ -74,8 +74,6 @@ export default {
       projects: [],
       error: null,
       last_update: new Date(),
-      searchTerm: '',
-      selectedTags: [],
       retries: 0
     }
   },
@@ -86,8 +84,10 @@ export default {
           project.teams
             .map(team => team.slug)
             .join(',')
-            .includes(this.selectedTags) &&
-          project.slug.toLowerCase().includes(this.searchTerm.toLowerCase())
+            .includes(this.$store.state.tags.sentry) &&
+          project.slug
+            .toLowerCase()
+            .includes(this.$store.state.search.sentry.toLowerCase())
       )
     },
     tags() {
