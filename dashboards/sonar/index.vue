@@ -15,6 +15,7 @@
           hide-details          
           multiple
           single-line
+          @input="setTags"
         />
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
@@ -24,6 +25,7 @@
           hide-details
           prepend-inner-icon="search"
           class="mt-0 pt-0 mb-3"
+          @input="setSearch"
         />
       </v-flex>
     </v-layout>
@@ -148,6 +150,12 @@ export default {
 
         this.error = msg
       }
+    },
+    setTags(tags) {
+      this.$store.dispatch('set_tags', { sonar: tags })
+    },
+    setSearch(value) {
+      this.$store.dispatch('set_search', { sonar: value })
     }
   }
 }

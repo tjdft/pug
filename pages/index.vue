@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     dashboards() {
-      return this.$env.TV_DASHBOARDS.replace(/ /g, '').split(',')
+      return this.$store.state.tv_dashboards
     }
   },
   mounted() {
