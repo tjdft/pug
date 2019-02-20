@@ -67,14 +67,17 @@ export const actions = {
     if (Object.keys(query).length === 0) return
 
     // Extract payload for each deashboard
-    Object.keys(query.tags).forEach(tag => {
-      commit('SET_TAGS', { [tag]: query.tags[`${tag}`] })
-    })
-
+    if (query.tags) {
+      Object.keys(query.tags).forEach(tag => {
+        commit('SET_TAGS', { [tag]: query.tags[`${tag}`] })
+      })
+    }
     // Extract payload for each deashboard
-    Object.keys(query.search).forEach(search => {
-      commit('SET_SEARCH', { [search]: query.search[`${search}`] })
-    })
+    if (query.search) {
+      Object.keys(query.search).forEach(search => {
+        commit('SET_SEARCH', { [search]: query.search[`${search}`] })
+      })
+    }
   },
 
   toogle_tv_mode({ commit, state }) {

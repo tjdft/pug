@@ -43,18 +43,12 @@
         Nothing here.
       </div>
     </v-container>
-    <div class="pt-5">
-      <v-btn class="ml-0" small flat @click="refresh()">
-        <v-icon left small>
-          refresh
-        </v-icon>
-        <small>{{ $moment(last_update).format('DD/MM/YYYY HH:mm:ss') }}</small>
-      </v-btn>
+    <div class="pt-2">      
       <small class="success--text pr-2">
         <strong>all fine</strong>
       </small>
       <small class="error--text pr-2">
-        <strong>has unsolved issues</strong>
+        <strong>has unsolved issues by 14 days</strong>
       </small>
     </div>
   </v-content>
