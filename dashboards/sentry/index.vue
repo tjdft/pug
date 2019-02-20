@@ -4,6 +4,19 @@
       <v-flex>
         <img src="sentry.png" height="32" class="mb-3">
       </v-flex>
+      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3>
+        <v-select
+          v-model="selectedTags"
+          :items="tags"
+          label="tags"
+          prepend-inner-icon="label"
+          class="mt-0 pt-0 mb-3 mr-2"
+          clearable
+          hide-details          
+          multiple
+          single-line
+        />
+      </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
         <v-text-field
           v-model="searchTerm"
@@ -23,8 +36,8 @@
           <sentry-app-card :project="project" />
         </v-flex>
       </v-layout>
-      <v-progress-linear v-if="projectList.length === 0 && !searchTerm && !error" indeterminate />
-      <div v-if="projectList.length === 0 && searchTerm" class="display-1 ma-5 text-xs-center">
+      <v-progress-linear v-if="projectList.length === 0 && !searchTerm && selectedTags.length === 0 && !error" indeterminate />
+      <div v-if="projectList.length === 0 && (searchTerm || selectedTags.length > 0)" class="display-1 ma-5 text-xs-center">
         Nothing here.
       </div>
     </v-container>
@@ -60,14 +73,30 @@ export default {
       error: null,
       last_update: new Date(),
       searchTerm: '',
+      selectedTags: [],
       retries: 0
     }
   },
   computed: {
     projectList() {
-      return this.projects.filter(project =>
-        project.slug.toLowerCase().includes(this.searchTerm.toLowerCase())
+      return this.projects.filter(
+        project =>
+          project.teams
+            .map(team => team.slug)
+            .join(',')
+            .includes(this.selectedTags) &&
+          project.slug.toLowerCase().includes(this.searchTerm.toLowerCase())
       )
+    },
+    tags() {
+      const tags = this.projects
+        .map(project => project.teams.map(team => team.slug))
+        .filter(teams => teams.length > 0)
+        .join(',')
+        .split(',')
+        .sort((a, b) => (a > b ? 1 : -1))
+
+      return [...new Set(tags)]
     }
   },
   mounted() {

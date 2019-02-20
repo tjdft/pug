@@ -121,6 +121,7 @@ export default {
         .filter(tags => tags.length > 0)
         .join(',')
         .split(',')
+        .sort((a, b) => (a > b ? 1 : -1))
 
       return [...new Set(tags)]
     }

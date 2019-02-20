@@ -39,11 +39,19 @@ mv .env.example .env
 Configure the environment variables.
 
 ```bash
-# Startup mode
+# Start up on fullscreen mode
 TV_MODE=false
 
-# How much time each panel should display
-TV_TRANSITION_INTERVAL=15000 
+# Dashboards that should be displayed (comma separated, order matters)
+TV_DASHBOARDS=sonar,sentry,openshift
+
+# How to display dashboards ?
+# carousel: each dashboard in a separate slide
+# all: displays all dashboards at same time on screen
+TV_LAYOUT=all
+
+# How much time each dashboards should be displayed (only for 'carousel' layout)
+TV_TRANSITION_INTERVAL=30000 
 
 # Openshift 
 OPENSHIFT_URL=https://openshift.company.com
