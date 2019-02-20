@@ -29,14 +29,26 @@ export const mutations = {
     state.tv_layout = value
   },
 
+  // Merge search string into state
   SET_TAGS(state, value) {
     const dashboard = Object.keys(value)[0]
     state.tags[dashboard] = Object.values(value)[0]
   },
 
+  // Merge tags into state
   SET_SEARCH(state, value) {
     const dashboard = Object.keys(value)[0]
     state.search[dashboard] = Object.values(value)[0]
+  },
+
+  // Replace url query string
+  SET_QUERY_STRING(state) {
+    this.$router.replace(
+      qs.stringify(
+        { tags: state.tags, search: state.search },
+        { encode: false, addQueryPrefix: true }
+      )
+    )
   }
 }
 
@@ -45,17 +57,21 @@ export const actions = {
     commit('SET_TV_MODE', this.$env.TV_MODE === 'true')
     commit('SET_TV_LAYOUT', this.$env.TV_LAYOUT)
 
+    // Convert dashboard comma list into array
     const dashboards = this.$env.TV_DASHBOARDS.replace(/ /g, '').split(',')
     commit('SET_TV_DASHBOARDS', dashboards)
 
+    // Parse current query string
     const query = qs.parse(this.$router.history.current.query)
 
     if (Object.keys(query).length === 0) return
 
+    // Extract payload for each deashboard
     Object.keys(query.tags).forEach(tag => {
       commit('SET_TAGS', { [tag]: query.tags[`${tag}`] })
     })
 
+    // Extract payload for each deashboard
     Object.keys(query.search).forEach(search => {
       commit('SET_SEARCH', { [search]: query.search[`${search}`] })
     })
@@ -73,25 +89,13 @@ export const actions = {
     commit('SET_TV_DASHBOARDS', payload)
   },
 
-  set_tags({ commit, state }, payload) {
+  set_tags({ commit, dispatch }, payload) {
     commit('SET_TAGS', payload)
-
-    this.$router.replace(
-      qs.stringify(
-        { tags: state.tags, search: state.search },
-        { encode: false, addQueryPrefix: true }
-      )
-    )
+    commit('SET_QUERY_STRING')
   },
 
-  set_search({ commit, state }, payload) {
+  set_search({ commit, dispatch }, payload) {
     commit('SET_SEARCH', payload)
-
-    this.$router.replace(
-      qs.stringify(
-        { tags: state.tags, search: state.search },
-        { encode: false, addQueryPrefix: true }
-      )
-    )
+    commit('SET_QUERY_STRING')
   }
 }
