@@ -158,6 +158,4 @@ Because PUG runs in universal mode (SSR), environment variables will be replaced
 
 ## TODO
 
-- Disable dashboards
-- Generate full query string for custom dashboards (default values for filters / tags)
-- Maybe display only projects with "pug" tag.
+- Custom layout

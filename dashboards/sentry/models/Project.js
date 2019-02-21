@@ -40,6 +40,6 @@ export default class Project extends Model {
    *  Project has unsolved issues
    */
   hasUnsolvedIssues() {
-    return !!this.issues
+    return this.issues > 0
   }
 }
