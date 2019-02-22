@@ -9,7 +9,7 @@
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>
-        <v-switch :input-value="!!$store.state.tv_mode" label="tv" class="pa-2" @change="toggle()" />
+        <v-switch :input-value="!!$store.state.tv_mode" label="tv" class="pa-2" @change="toggle" />
       </v-toolbar-items>
     </v-toolbar>
 
@@ -57,15 +57,15 @@ export default {
     })
   },
   methods: {
-    toggle() {
-      if (this.$store.state.tv_mode) {
-        this.$toast.show('"TV MODE" OFF: Panels will not switch automatically')
-      } else {
-        this.showToolbar = false
+    toggle(stat) {
+      if (stat) {
         this.$toast.show('"TV MODE" ON: Panels will switch automatically')
+        this.showToolbar = false
+      } else {
+        this.$toast.show('"TV MODE" OFF: Panels will not switch automatically')
       }
 
-      this.$store.dispatch('toogle_tv_mode')
+      this.$store.dispatch('set_tv_mode', stat)
     }
   }
 }

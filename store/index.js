@@ -41,13 +41,13 @@ export const mutations = {
 
   // Replace url query string
   SET_QUERY_STRING(state) {
-    const queryObject = { tags: state.tags, search: {} }
-
-    // provide a clean url if there are no search terms
-    Object.keys(state.search).forEach(dashboard => {
-      if (state.search[dashboard] === '') return
-      queryObject.search[dashboard] = state.search[dashboard]
-    })
+    const queryObject = {
+      tv_mode: state.tv_mode,
+      tv_dashboards: state.tv_dashboards.join(','),
+      tv_layout: state.tv_layout,
+      tags: state.tags,
+      search: state.search
+    }
 
     this.$router.replace({ path: '/', query: queryObject })
   }
@@ -55,14 +55,15 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit({ commit }) {
-    commit('SET_TV_MODE', this.$env.TV_MODE === 'true')
-    commit('SET_TV_LAYOUT', this.$env.TV_LAYOUT)
-
-    // Convert dashboard comma list into array
-    const dashboards = this.$env.TV_DASHBOARDS.replace(/ /g, '').split(',')
-    commit('SET_TV_DASHBOARDS', dashboards)
-
     const query = this.$router.history.current.query
+
+    const tvMode = query.tv_mode === 'true' || this.$env.TV_MODE === 'true'
+
+    const tvLayout = query.tv_layout || this.$env.TV_LAYOUT
+
+    const tvDashboards = query.tv_dashboards
+      ? query.tv_dashboards.split(',')
+      : this.$env.TV_DASHBOARDS.split(',')
 
     // Extract payload for each deashboard
     if (query.tags) {
@@ -77,18 +78,25 @@ export const actions = {
         commit('SET_SEARCH', { [search]: query.search[`${search}`] })
       })
     }
+
+    commit('SET_TV_MODE', tvMode)
+    commit('SET_TV_LAYOUT', tvLayout)
+    commit('SET_TV_DASHBOARDS', tvDashboards)
   },
 
-  toogle_tv_mode({ commit, state }) {
+  set_tv_mode({ commit, state }) {
     commit('SET_TV_MODE', !state.tv_mode)
+    commit('SET_QUERY_STRING')
   },
 
   set_tv_layout({ commit }, payload) {
     commit('SET_TV_LAYOUT', payload)
+    commit('SET_QUERY_STRING')
   },
 
   set_tv_dashboards({ commit }, payload) {
     commit('SET_TV_DASHBOARDS', payload)
+    commit('SET_QUERY_STRING')
   },
 
   set_tags({ commit, dispatch }, payload) {
