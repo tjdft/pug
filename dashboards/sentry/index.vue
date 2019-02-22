@@ -73,16 +73,21 @@ export default {
   },
   computed: {
     projectList() {
-      return this.projects.filter(
-        project =>
+      const selectedTags = this.$store.state.tags.sentry
+      const searchTerm = this.$store.state.search.sentry
+
+      return this.projects
+        .filter(project =>
+          project.slug.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .filter(project =>
           project.teams
             .map(team => team.slug)
-            .join(',')
-            .includes(this.$store.state.tags.sentry) &&
-          project.slug
-            .toLowerCase()
-            .includes(this.$store.state.search.sentry.toLowerCase())
-      )
+            .some(
+              team =>
+                selectedTags.length === 0 || selectedTags.indexOf(team) >= 0
+            )
+        )
     },
     tags() {
       const tags = this.projects

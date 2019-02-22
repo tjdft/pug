@@ -109,13 +109,18 @@ export default {
   },
   computed: {
     projectList() {
-      return this.projects.filter(
-        project =>
-          project.tags.join(',').includes(this.$store.state.tags.sonar) &&
-          project.name
-            .toLowerCase()
-            .includes(this.$store.state.search.sonar.toLowerCase())
-      )
+      const selectedTags = this.$store.state.tags.sonar
+      const searchTerm = this.$store.state.search.sonar
+
+      return this.projects
+        .filter(project =>
+          project.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .filter(project =>
+          project.tags.some(
+            tag => selectedTags.length === 0 || selectedTags.indexOf(tag) >= 0
+          )
+        )
     },
     tags() {
       const tags = this.projects
