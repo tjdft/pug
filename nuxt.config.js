@@ -36,6 +36,21 @@ module.exports = {
   css: ['~/assets/style/app.styl'],
 
   /*
+  ** Router
+  */
+  router: {
+    parseQuery: function(q) {
+      return require('qs').parse(q)
+    },
+    stringifyQuery: function(q) {
+      return require('qs').stringify(q, {
+        encode: false,
+        addQueryPrefix: true
+      })
+    }
+  },
+
+  /*
   ** Plugins to load before mounting the App
   */
   plugins: ['@/plugins/vuetify', '@/plugins/model'],

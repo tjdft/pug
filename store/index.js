@@ -1,5 +1,3 @@
-import qs from 'qs'
-
 export const state = () => ({
   tv_mode: process.env.TV_MODE,
   tv_dashboards: process.env.TV_DASHBOARDS,
@@ -43,12 +41,15 @@ export const mutations = {
 
   // Replace url query string
   SET_QUERY_STRING(state) {
-    this.$router.replace(
-      qs.stringify(
-        { tags: state.tags, search: state.search },
-        { encode: false, addQueryPrefix: true }
-      )
-    )
+    const queryObject = { tags: state.tags, search: {} }
+
+    // provide a clean url if there are no search terms
+    Object.keys(state.search).forEach(dashboard => {
+      if (state.search[dashboard] === '') return
+      queryObject.search[dashboard] = state.search[dashboard]
+    })
+
+    this.$router.replace({ path: '/', query: queryObject })
   }
 }
 
@@ -61,10 +62,7 @@ export const actions = {
     const dashboards = this.$env.TV_DASHBOARDS.replace(/ /g, '').split(',')
     commit('SET_TV_DASHBOARDS', dashboards)
 
-    // Parse current query string
-    const query = qs.parse(this.$router.history.current.query)
-
-    if (Object.keys(query).length === 0) return
+    const query = this.$router.history.current.query
 
     // Extract payload for each deashboard
     if (query.tags) {
@@ -72,6 +70,7 @@ export const actions = {
         commit('SET_TAGS', { [tag]: query.tags[`${tag}`] })
       })
     }
+
     // Extract payload for each deashboard
     if (query.search) {
       Object.keys(query.search).forEach(search => {
