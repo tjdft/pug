@@ -2,7 +2,7 @@
   <v-content>
     <v-layout row wrap>
       <v-flex>
-        <img src="openshift.png" height="32" class="mb-3">
+        <img src="openshift.svg" height="28" class="mb-3">
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2 xs12>
         <v-text-field

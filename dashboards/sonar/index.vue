@@ -2,7 +2,7 @@
   <v-content>
     <v-layout row wrap>
       <v-flex>
-        <img src="sonarqube.png" height="32" class="mb-3">
+        <img src="sonarqube.svg" height="40" class="mb-2">
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3 xs12>
         <v-select

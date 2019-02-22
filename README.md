@@ -53,6 +53,9 @@ TV_LAYOUT=all
 # How much time each dashboards should be displayed (only for 'carousel' layout)
 TV_TRANSITION_INTERVAL=30000 
 
+# URL query string representing all configs (you must to use quotes)
+TV_QUERY=
+
 # Openshift 
 OPENSHIFT_URL=https://openshift.company.com
 OPENSHIFT_TOKEN=
