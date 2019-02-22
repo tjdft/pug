@@ -30,48 +30,13 @@ PUG is a frontend app only. It intends exclusively to display dashboards on your
 
 ## LOCAL SETUP
 
-Create a `.env` file from `.env.example `
+- Create a `.env` file from `.env.example `
 
 ```bash
 mv .env.example .env
 ```
 
-Configure the environment variables.
-
-```bash
-# Start up on fullscreen mode
-TV_MODE=false
-
-# Dashboards that should be displayed (comma separated, order matters)
-TV_DASHBOARDS=sonar,sentry,openshift
-
-# How to display dashboards ?
-# carousel: each dashboard in a separate slide
-# all: displays all dashboards at same time on screen
-TV_LAYOUT=all
-
-# How much time each dashboards should be displayed (only for 'carousel' layout)
-TV_TRANSITION_INTERVAL=30000 
-
-# URL query string representing all configs (you must to use quotes)
-TV_QUERY=
-
-# Openshift 
-OPENSHIFT_URL=https://openshift.company.com
-OPENSHIFT_TOKEN=
-OPENSHIFT_REFRESH_INTERVAL=60000
-
-# Sonar
-SONAR_URL=https://sonar.company.com
-SONAR_TOKEN=
-SONAR_REFRESH_INTERVAL=60000
-
-# Sentry
-SENTRY_URL=http://sentry.company.com
-SENTRY_TOKEN=
-SENTRY_REFRESH_INTERVAL=60000
-```
-
+- Configure the environment variables.
 
 - Install dependencies and start up local server.
 
@@ -92,12 +57,14 @@ Note that is necessary an API KEY for each service. So, only projects binded to 
 
 It is highly recommend to use API KEYS with readonly permissions. 
 
-It is highly recommend **do not commit** the `.env` file into your repository.  In order to keep API KEYS in safe, you should provide them as environment variables at building time or at runtime (Ex: `OPENSHIT_TOKEN=123 yarn start`).
+It is highly recommend **do not commit** the `.env` file into your repository.  In order to keep API KEYS in safe, you should provide them as environment variables at building time or at runtime.
+
+Because PUG runs in universal mode (SSR), environment variables can be replaced at runtime.
 
 
 ### Proxy
 
-By default, some services like Openshift and Sonar does not have CORS enabled by default. So, PUG uses `@nuxtjs/proxy` module to avoid CORS issues. Internal requests to paths like, e.g, `'/openshift/oapi/v1/projects'`  will be rewrited to actual external Openshift API url (`https://openshift.company.com/oapi/v1/projects`).
+By default, some services like Openshift and Sonar does not have CORS enabled by default. So, PUG uses `@nuxtjs/proxy` module to avoid CORS issues. Internal requests to paths like, e.g, `'/openshift/oapi/v1/projects'`  will be rewrited to actual external Openshift API url `'https://openshift.company.com/oapi/v1/projects'`.
 
 
 ### Deploy manually
@@ -140,23 +107,27 @@ So we can start it through Node server in production
 yarn start
 ```
 
-You can opt to pass some environment variables at runtime, instead at building time.
+You can opt to pass some envirBecause PUG runs in universal mode (SSR), environment variables will be replaced at runtime. runtime, instead at building time.
 
 ```
-# It will override existing environment variables
-OPENSHIFT_TOKEN=123 yarn start
+# It will override existing enBecause PUG runs in universal mode (SSR), environment variables will be replaced at runtime.
+OPENSHIFT_TOKEN=123 yarn startBecause PUG runs in universal mode (SSR), environment variables will be replaced at runtime.
 ```
 
 
-### Deploy with Openshift
+### Deploy with Docker
 
-This is the simplest strategy to deploy.
+This is the simplest strategy to deploy. This image already contains Nginx and Node, properly configured.
 
 - Pull `tjdft/pug:<version>` image 
 - Setup necessary environment variables.
+- Bind to port `80` or `8080`
 - You are done!
 
-Because PUG runs in universal mode (SSR), environment variables will be replaced at runtime.
+```bash
+docker run -it -p 8080:8080 --env-file=path/to/.env tjdft/pug
+```
+
 
 
 ## TODO
