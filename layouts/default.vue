@@ -9,7 +9,12 @@
       </v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>        
-        <v-menu v-model="menu" :close-on-content-click="false" offset-x>
+        <v-menu
+          v-model="menu"
+          :close-on-content-click="false"
+          left
+          offset-x
+        >
           <v-btn slot="activator" icon>
             <v-icon>settings</v-icon>
           </v-btn>
