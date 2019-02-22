@@ -6,11 +6,12 @@
       </v-flex>
       <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
         <v-text-field
-          v-model="searchTerm"
+          :value="$store.state.search.openshift"
           label="search"
           hide-details
           prepend-inner-icon="search"
           class="mt-0 pt-0 mb-3"
+          @input="setSearch"
         />
       </v-flex>
     </v-layout>
@@ -23,8 +24,8 @@
           <openshift-app-card :project="project" />
         </v-flex>
       </v-layout>
-      <v-progress-linear v-if="projectList.length === 0 && !searchTerm && !error" indeterminate />
-      <div v-if="projectList.length === 0 && searchTerm" class="display-1 ma-5 text-xs-center">
+      <v-progress-linear v-if="projectList.length === 0 && !$store.state.search.openshift && !error" indeterminate />
+      <div v-if="projectList.length === 0 && $store.state.search.openshift" class="display-1 ma-5 text-xs-center">
         Nothing here.
       </div>
     </v-container>
@@ -61,7 +62,6 @@ export default {
       projects: [],
       error: null,
       last_update: new Date(),
-      searchTerm: '',
       retries: 0
     }
   },
@@ -70,7 +70,7 @@ export default {
       return this.projects.filter(project =>
         project.metadata.annotations['openshift.io/display-name']
           .toLowerCase()
-          .includes(this.searchTerm.toLowerCase())
+          .includes(this.$store.state.search.openshift.toLowerCase())
       )
     }
   },
@@ -96,6 +96,9 @@ export default {
 
         this.error = msg
       }
+    },
+    setSearch(value) {
+      this.$store.dispatch('set_search', { openshift: value })
     }
   }
 }
