@@ -25,17 +25,17 @@
                 :items="$store.state.options.dashboards"
                 :value="$store.state.tv_dashboards"
                 prepend-icon="dashboard"
-                hint="Panels to be displayed"
+                hint="Dashboards to be displayed"
                 persistent-hint
                 multiple
                 @change="setDashboards"
               />
 
               <v-select
-                :items="$store.state.options.layouts"
-                :value="$store.state.tv_layout"
+                :items="$store.state.options.views"
+                :value="$store.state.tv_view"
                 prepend-icon="view_carousel"
-                hint="Main layout"
+                hint="View mode"
                 persistent-hint                
                 @change="setLayout"
               />
@@ -103,7 +103,7 @@ export default {
       this.$store.dispatch('set_tv_dashboards', value)
     },
     setLayout(value) {
-      this.$store.dispatch('set_tv_layout', value)
+      this.$store.dispatch('set_tv_view', value)
     }
   }
 }

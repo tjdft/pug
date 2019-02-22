@@ -1,10 +1,10 @@
 export const state = () => ({
   tv_mode: process.env.TV_MODE,
   tv_dashboards: process.env.TV_DASHBOARDS,
-  tv_layout: process.env.TV_LAYOUT,
+  tv_view: process.env.TV_VIEW,
   options: {
     dashboards: ['openshift', 'sonar', 'sentry'],
-    layouts: ['all', 'carousel']
+    views: ['all', 'carousel']
   },
   tags: {
     sonar: [],
@@ -27,8 +27,8 @@ export const mutations = {
     state.tv_dashboards = value
   },
 
-  SET_TV_LAYOUT(state, value) {
-    state.tv_layout = value
+  SET_TV_VIEW(state, value) {
+    state.tv_view = value
   },
 
   // Merge search string into state
@@ -48,7 +48,7 @@ export const mutations = {
     const queryObject = {
       tv_mode: state.tv_mode,
       tv_dashboards: state.tv_dashboards.join(','),
-      tv_layout: state.tv_layout,
+      tv_view: state.tv_view,
       tags: state.tags,
       search: state.search
     }
@@ -64,10 +64,8 @@ export const actions = {
     }
 
     const query = this.$router.history.current.query
-
     const tvMode = query.tv_mode === 'true' || this.$env.TV_MODE === 'true'
-
-    const tvLayout = query.tv_layout || this.$env.TV_LAYOUT
+    const tvView = query.tv_view || this.$env.TV_VIEW
 
     const tvDashboards = query.tv_dashboards
       ? query.tv_dashboards.split(',')
@@ -88,7 +86,7 @@ export const actions = {
     }
 
     commit('SET_TV_MODE', tvMode)
-    commit('SET_TV_LAYOUT', tvLayout)
+    commit('SET_TV_VIEW', tvView)
     commit('SET_TV_DASHBOARDS', tvDashboards)
   },
 
@@ -97,8 +95,8 @@ export const actions = {
     commit('SET_QUERY_STRING')
   },
 
-  set_tv_layout({ commit }, payload) {
-    commit('SET_TV_LAYOUT', payload)
+  set_tv_view({ commit }, payload) {
+    commit('SET_TV_VIEW', payload)
     commit('SET_QUERY_STRING')
   },
 

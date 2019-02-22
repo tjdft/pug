@@ -1,12 +1,12 @@
 <template>
   <v-content>
-    <v-layout v-if="$store.state.tv_layout === 'all'" row wrap>
+    <v-layout v-if="$store.state.tv_view === 'all'" row wrap>
       <v-flex v-for="dashboard in dashboards" :key="dashboard" xs12>
         <dashboard :type="dashboard" class="mb-5" />
       </v-flex>
     </v-layout>
 
-    <v-layout v-if="$store.state.tv_layout === 'carousel'">
+    <v-layout v-if="$store.state.tv_view === 'carousel'">
       <v-item-group
 
         v-show="!$store.state.tv_mode && $vuetify.breakpoint.lgAndUp"
