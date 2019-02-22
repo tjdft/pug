@@ -2,6 +2,10 @@ export const state = () => ({
   tv_mode: process.env.TV_MODE,
   tv_dashboards: process.env.TV_DASHBOARDS,
   tv_layout: process.env.TV_LAYOUT,
+  options: {
+    dashboards: ['openshift', 'sonar', 'sentry'],
+    layouts: ['all', 'carousel']
+  },
   tags: {
     sonar: [],
     sentry: [],

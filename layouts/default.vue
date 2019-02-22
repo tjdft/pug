@@ -8,8 +8,35 @@
         <strong>PUG</strong>
       </v-toolbar-title>
       <v-spacer />
-      <v-toolbar-items>
-        <v-switch :input-value="!!$store.state.tv_mode" label="tv" class="pa-2" @change="toggle" />
+      <v-toolbar-items>        
+        <v-menu v-model="menu" :close-on-content-click="false" offset-x>
+          <v-btn slot="activator" icon>
+            <v-icon>settings</v-icon>
+          </v-btn>
+          <v-card>
+            <v-card-text>
+              <v-switch :input-value="!!$store.state.tv_mode" hint="Full screen mode" persistent-hint prepend-icon="live_tv" @change="toggle" />
+              <v-select
+                :items="$store.state.options.dashboards"
+                :value="$store.state.tv_dashboards"
+                prepend-icon="dashboard"
+                hint="Panels to be displayed"
+                persistent-hint
+                multiple
+                @change="setDashboards"
+              />
+
+              <v-select
+                :items="$store.state.options.layouts"
+                :value="$store.state.tv_layout"
+                prepend-icon="view_carousel"
+                hint="Main layout"
+                persistent-hint                
+                @change="setLayout"
+              />
+            </v-card-text>           
+          </v-card>
+        </v-menu>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -36,7 +63,7 @@
 export default {
   data() {
     return {
-      last_update: new Date(),
+      menu: false,
       mouse_moved_at: new Date(),
       showToolbar: !this.$store.state.tv_mode
     }
@@ -66,6 +93,12 @@ export default {
       }
 
       this.$store.dispatch('set_tv_mode', stat)
+    },
+    setDashboards(value) {
+      this.$store.dispatch('set_tv_dashboards', value)
+    },
+    setLayout(value) {
+      this.$store.dispatch('set_tv_layout', value)
     }
   }
 }
