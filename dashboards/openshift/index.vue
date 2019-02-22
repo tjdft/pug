@@ -4,7 +4,7 @@
       <v-flex>
         <img src="openshift.png" height="32" class="mb-3">
       </v-flex>
-      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
+      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2 xs12>
         <v-text-field
           :value="$store.state.search.openshift"
           label="search"

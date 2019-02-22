@@ -4,7 +4,7 @@
       <v-flex>
         <img src="sonarqube.png" height="32" class="mb-3">
       </v-flex>
-      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3>
+      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3 xs12>
         <v-select
           :value="$store.state.tags.sonar"
           :items="tags"
@@ -18,7 +18,7 @@
           @input="setTags"
         />
       </v-flex>
-      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
+      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2 xs12>
         <v-text-field
           :value="$store.state.search.sonar"
           label="search"
@@ -34,7 +34,6 @@
         {{ error }}
       </v-alert>
       <v-layout row wrap>
-        <sonar-data-table v-if="false" :projects="projectList" />
         <v-flex v-for="project in projectList" :key="project.id" lg3 xl2 xs12>
           <sonar-app-card :project="project" />
         </v-flex>

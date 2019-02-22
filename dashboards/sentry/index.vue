@@ -4,7 +4,7 @@
       <v-flex>
         <img src="sentry.png" height="32" class="mb-3">
       </v-flex>
-      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3>
+      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3 xs12>
         <v-select
           :value="$store.state.tags.sentry"
           :items="tags"
@@ -18,7 +18,7 @@
           @input="setTags"
         />
       </v-flex>
-      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2>
+      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2 xs12>
         <v-text-field
           :value="$store.state.search.sentry"
           label="search"

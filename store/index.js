@@ -58,7 +58,11 @@ export const mutations = {
 }
 
 export const actions = {
-  nuxtServerInit({ commit }) {
+  nuxtServerInit({ commit }, { redirect }) {
+    if (this.$env.TV_QUERY) {
+      redirect(`/?${this.$env.TV_QUERY}`)
+    }
+
     const query = this.$router.history.current.query
 
     const tvMode = query.tv_mode === 'true' || this.$env.TV_MODE === 'true'

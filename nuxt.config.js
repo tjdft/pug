@@ -64,8 +64,7 @@ module.exports = {
     '@nuxtjs/moment',
     '@nuxtjs/toast',
     [
-      // All env vars are loaded through `@nuxtjs/dotenv` module.
-      // But, only variables listed here can be replaced at run time through `nuxt-env` module
+      // Make environment variables replaceable at runtime
       // This variables should be referenced at components as `this.$env.VAR_NAME` instead of `process.env.VAR_NAME`
       'nuxt-env',
       {
@@ -74,6 +73,7 @@ module.exports = {
           'TV_DASHBOARDS',
           'TV_LAYOUT',
           'TV_TRANSITION_INTERVAL',
+          'TV_QUERY',
           'OPENSHIFT_URL',
           'OPENSHIFT_REFRESH_INTERVAL',
           'SENTRY_URL',
