@@ -4,13 +4,15 @@
       <grid-layout
         :layout.sync="layout"
         :col-num="12"
-        :row-height="30"
+        :row-height="32"
         :is-draggable="true"
         :is-resizable="true"
         :is-mirrored="false"
         :vertical-compact="true"
         :margin="[10, 10]"
         :use-css-transforms="true"
+        :responsive="true"
+        :autosize="false"
       >
         <grid-item
           v-for="item in layout"

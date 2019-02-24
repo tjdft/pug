@@ -67,10 +67,18 @@ export default {
   },
   computed: {
     projectList() {
+      const searchTerms = this.$store.state.search.openshift
+        .toLowerCase()
+        .split(',')
+
       return this.projects.filter(project =>
-        project.metadata.annotations['openshift.io/display-name']
-          .toLowerCase()
-          .includes(this.$store.state.search.openshift.toLowerCase())
+        searchTerms.some(
+          term =>
+            searchTerms.length === 0 ||
+            project.metadata.annotations['openshift.io/display-name']
+              .toLowerCase()
+              .includes(term.trim())
+        )
       )
     }
   },

@@ -109,11 +109,17 @@ export default {
   computed: {
     projectList() {
       const selectedTags = this.$store.state.tags.sonar
-      const searchTerm = this.$store.state.search.sonar
+      const searchTerms = this.$store.state.search.sonar
+        .toLowerCase()
+        .split(',')
 
       return this.projects
         .filter(project =>
-          project.name.toLowerCase().includes(searchTerm.toLowerCase())
+          searchTerms.some(
+            term =>
+              searchTerms.length === 0 ||
+              project.name.toLowerCase().includes(term.trim())
+          )
         )
         .filter(project =>
           project.tags.some(

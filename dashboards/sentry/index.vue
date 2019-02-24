@@ -74,11 +74,17 @@ export default {
   computed: {
     projectList() {
       const selectedTags = this.$store.state.tags.sentry
-      const searchTerm = this.$store.state.search.sentry
+      const searchTerms = this.$store.state.search.sentry
+        .toLowerCase()
+        .split(',')
 
       return this.projects
         .filter(project =>
-          project.slug.toLowerCase().includes(searchTerm.toLowerCase())
+          searchTerms.some(
+            term =>
+              searchTerms.length === 0 ||
+              project.slug.toLowerCase().includes(term.trim())
+          )
         )
         .filter(project =>
           project.teams

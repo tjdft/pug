@@ -10,7 +10,7 @@ services:
     image: tjdft/vue-ssr:latest
     user: root
     restart: always
-    entrypoint: /bin/bash -c "echo 'Done! keep bash running :)' && tail -F /dev/null"
+    entrypoint: /bin/bash -c "echo 'Done! keep container running :)' && tail -F /dev/null"
     environment: 
         - HOST=0.0.0.0        
     volumes:
