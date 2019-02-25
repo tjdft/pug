@@ -2,32 +2,52 @@
   <v-content>
     <v-layout row wrap>
       <v-flex>
-        <img src="~static/sentry.svg" height="50">
-      </v-flex>
-      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" lg3 xs12>
-        <v-select
-          :value="$store.state.tags.sentry"
-          :items="tags"
-          label="tags"
-          prepend-inner-icon="label"
-          class="mt-0 pt-0 mb-3 mr-2"
-          clearable
-          hide-details          
-          multiple
-          single-line
-          @input="setTags"
-        />
-      </v-flex>
-      <v-flex v-if="!$store.state.tv_mode && projects.length > 0" text-xs-right lg2 xs12>
-        <v-text-field
-          :value="$store.state.search.sentry"
-          label="search"
-          hide-details
-          prepend-inner-icon="search"
-          class="mt-0 pt-0 mb-3"
-          @input="setSearch"
-        />
-      </v-flex>
+        <!-- <img src="~static/sentry.svg" height="50" style="vertical-align: middle"> -->
+        <span class="headline">
+          <strong>Sentry</strong>
+        </span>
+
+        <v-menu
+          v-if="!$store.state.tv_mode && projects.length > 0"
+          v-model="menu"
+          :close-on-content-click="false"       
+          :bottom="true"             
+        >
+          <v-btn slot="activator" icon class="mt-0">
+            <v-icon color="grey lighten-1">
+              toc
+            </v-icon>
+          </v-btn>
+          <v-card :width="400">
+            <v-card-text>
+              <v-select
+                :value="$store.state.tags.sentry"
+                :items="tags"
+                label="tags"
+                prepend-inner-icon="label"                            
+                clearable
+                multiple
+                chips                
+                @input="setTags"
+              />
+              <v-text-field
+                :value="$store.state.search.sentry"
+                label="search"
+                prepend-inner-icon="search"                
+                persistent-hint    
+                hint="You can search with a comma separated list"
+                @input="setSearch"
+              />
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer />
+              <v-btn flat color="primary" @click="menu = false">
+                close
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+      </v-flex>      
     </v-layout>
     <v-container fluid grid-list-md class="pa-0">
       <v-alert type="error" :value="error" class="mb-4">
@@ -39,11 +59,11 @@
         </v-flex>
       </v-layout>
       <v-progress-linear v-if="projects.length === 0 && !error" indeterminate />
-      <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 ma-5 text-xs-center">
+      <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 text-xs-center">
         Nothing here.
       </div>
     </v-container>
-    <div class="pt-2">      
+    <div v-if="projects.length > 0 && projectList.length > 0" class="pt-2">
       <small class="success--text pr-2">
         <strong>all fine</strong>
       </small>
@@ -65,6 +85,7 @@ export default {
   components: { SentryAppCard },
   data() {
     return {
+      menu: false,
       projects: [],
       error: null,
       last_update: new Date(),
