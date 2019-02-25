@@ -24,8 +24,8 @@
           <openshift-app-card :project="project" />
         </v-flex>
       </v-layout>
-      <v-progress-linear v-if="projectList.length === 0 && !$store.state.search.openshift && !error" indeterminate />
-      <div v-if="projectList.length === 0 && $store.state.search.openshift" class="display-1 ma-5 text-xs-center">
+      <v-progress-linear v-if="projects.length === 0 && !error" indeterminate />
+      <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 ma-5 text-xs-center">
         Nothing here.
       </div>
     </v-container>
