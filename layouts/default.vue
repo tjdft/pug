@@ -54,10 +54,10 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer class="grey lighten-3 pa-4">
+    <v-footer class="grey lighten-3 pb-4 pr-4" style=" margin-top: -50px">
       <v-layout>
         <v-flex text-xs-right>
-          <v-icon style="font-size: 20px">
+          <v-icon style="font-size: 20px;">
             explore
           </v-icon> <strong>TJDFT</strong> LABS
         </v-flex>
