@@ -4,7 +4,7 @@
     <v-toolbar v-if="showToolbar" color="white" flat dense>
       <!-- toolbar title -->
       <v-toolbar-title>
-        <img src="pug.png" height="30" title="pug" style="vertical-align: bottom">
+        <img src="~static/pug.png" height="30" title="pug" style="vertical-align: bottom">
         <strong>PUG</strong>
       </v-toolbar-title>
       <v-spacer />
@@ -57,7 +57,9 @@
     <v-footer class="grey lighten-3 pa-4">
       <v-layout>
         <v-flex text-xs-right>
-          <strong>TJDFT</strong> LABS
+          <v-icon style="font-size: 20px">
+            explore
+          </v-icon> <strong>TJDFT</strong> LABS
         </v-flex>
       </v-layout>
     </v-footer>
