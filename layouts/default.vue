@@ -19,8 +19,7 @@
             <v-icon>settings</v-icon>
           </v-btn>
           <v-card>
-            <v-card-text>
-              <v-switch :input-value="!!$store.state.tv_mode" hint="Full screen mode" persistent-hint prepend-icon="live_tv" @change="toggle" />
+            <v-card-text>              
               <v-select
                 :items="$store.state.options.dashboards"
                 :value="$store.state.tv_dashboards"
@@ -28,7 +27,7 @@
                 hint="Dashboards to be displayed"
                 persistent-hint
                 multiple
-                @change="setDashboards"
+                @change="setTvDashboards"
               />
 
               <v-select
@@ -37,7 +36,14 @@
                 prepend-icon="view_carousel"
                 hint="View mode"
                 persistent-hint                
-                @change="setLayout"
+                @change="setTvView"
+              />
+              <v-switch
+                :input-value="!!$store.state.tv_mode"
+                hint="Full screen mode"
+                persistent-hint
+                prepend-icon="live_tv"
+                @change="setTvMode"
               />
             </v-card-text>           
           </v-card>
@@ -54,7 +60,7 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer class="grey lighten-3 pb-4 pr-4" style=" margin-top: -50px">
+    <v-footer fixed color="transparent" class="pb-4 pr-4">
       <v-layout>
         <v-flex text-xs-right>
           <v-icon style="font-size: 20px;">
@@ -91,20 +97,26 @@ export default {
     })
   },
   methods: {
-    toggle(stat) {
-      if (stat) {
-        this.$toast.show('"TV MODE" ON: Panels will switch automatically')
+    setTvMode(mode) {
+      let message
+
+      if (mode) {
+        message = '"TV MODE" ON: Panels will switch automatically'
         this.showToolbar = false
       } else {
-        this.$toast.show('"TV MODE" OFF: Panels will not switch automatically')
+        message = '"TV MODE" OFF: Panels will not switch automatically'
       }
 
-      this.$store.dispatch('set_tv_mode', stat)
+      if (this.$store.state.tv_view === 'carousel') {
+        this.$toast.show(message)
+      }
+
+      this.$store.dispatch('set_tv_mode', mode)
     },
-    setDashboards(value) {
+    setTvDashboards(value) {
       this.$store.dispatch('set_tv_dashboards', value)
     },
-    setLayout(value) {
+    setTvView(value) {
       this.$store.dispatch('set_tv_view', value)
     }
   }

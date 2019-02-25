@@ -1,55 +1,50 @@
 <template>
-  <v-content>
-    <v-layout row wrap>
-      <v-flex>
-        <!-- <img src="~static/sentry.svg" height="50" style="vertical-align: middle"> -->
-        <span class="headline">
-          <strong>Sentry</strong>
-        </span>
+  <v-content>    
+    <span class="headline">
+      <strong>Sentry</strong>
+    </span>
 
-        <v-menu
-          v-if="!$store.state.tv_mode && projects.length > 0"
-          v-model="menu"
-          :close-on-content-click="false"       
-          :bottom="true"             
-        >
-          <v-btn slot="activator" icon class="mt-0">
-            <v-icon color="grey lighten-1">
-              toc
-            </v-icon>
+    <v-menu
+      v-if="!$store.state.tv_mode && projects.length > 0"
+      v-model="menu"
+      :close-on-content-click="false"       
+      :bottom="true"             
+    >
+      <v-btn slot="activator" icon class="mt-0">
+        <v-icon color="grey lighten-1">
+          toc
+        </v-icon>
+      </v-btn>
+      <v-card :width="400">
+        <v-card-text>
+          <v-select
+            :value="$store.state.tags.sentry"
+            :items="tags"
+            label="tags"
+            prepend-inner-icon="label"                            
+            clearable
+            multiple
+            chips                
+            @input="setTags"
+          />
+          <v-text-field
+            :value="$store.state.search.sentry"
+            label="search"
+            prepend-inner-icon="search"                
+            persistent-hint    
+            hint="You can search with a comma separated list"
+            @input="setSearch"
+          />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn flat color="primary" @click="menu = false">
+            close
           </v-btn>
-          <v-card :width="400">
-            <v-card-text>
-              <v-select
-                :value="$store.state.tags.sentry"
-                :items="tags"
-                label="tags"
-                prepend-inner-icon="label"                            
-                clearable
-                multiple
-                chips                
-                @input="setTags"
-              />
-              <v-text-field
-                :value="$store.state.search.sentry"
-                label="search"
-                prepend-inner-icon="search"                
-                persistent-hint    
-                hint="You can search with a comma separated list"
-                @input="setSearch"
-              />
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer />
-              <v-btn flat color="primary" @click="menu = false">
-                close
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-menu>
-      </v-flex>      
-    </v-layout>
-    <v-container fluid grid-list-md class="pa-0">
+        </v-card-actions>
+      </v-card>
+    </v-menu>    
+    <v-container fluid grid-list-md class="pa-0 mt-2">
       <v-alert type="error" :value="error" class="mb-4">
         {{ error }}
       </v-alert>
