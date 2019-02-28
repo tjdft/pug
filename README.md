@@ -110,8 +110,8 @@ yarn start
 You can opt to pass some envirBecause PUG runs in universal mode (SSR), environment variables will be replaced at runtime. runtime, instead at building time.
 
 ```
-# It will override existing enBecause PUG runs in universal mode (SSR), environment variables will be replaced at runtime.
-OPENSHIFT_TOKEN=123 yarn startBecause PUG runs in universal mode (SSR), environment variables will be replaced at runtime.
+# Because PUG runs in universal mode (SSR), environment variables will be replaced at runtime.
+OPENSHIFT_TOKEN=123 yarn start
 ```
 
 
