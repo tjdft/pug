@@ -4,7 +4,7 @@
       <strong>Openshift</strong>
     </span>
     <v-menu
-      v-if="!$store.state.tv_mode && projects.length > 0"
+      v-if="!$store.state.tv.fullscreen && projects.length > 0"
       v-model="menu"
       :close-on-content-click="false"       
       :bottom="true"             
@@ -17,7 +17,7 @@
       <v-card :width="400">
         <v-card-text>      
           <v-text-field
-            :value="$store.state.search.openshift"
+            :value="$store.state.dashboards.openshift.search"
             label="search"
             prepend-inner-icon="search"                
             persistent-hint    
@@ -38,7 +38,7 @@
         {{ error }}
       </v-alert>
       <v-layout row wrap>
-        <v-flex v-for="project in projectList" :key="project.metadata.uid" lg3 xl2 xs12>
+        <v-flex v-for="project in projectList" :key="project.metadata.uid" :class="`xs${columnSize}`">
           <openshift-app-card :project="project" />
         </v-flex>
       </v-layout>
@@ -75,6 +75,12 @@ import OpenshiftAppCard from '@/dashboards/openshift/components/OpenshiftAppCard
 
 export default {
   components: { OpenshiftAppCard },
+  props: {
+    columnSize: {
+      type: Number,
+      default: 3
+    }
+  },
   data() {
     return {
       menu: false,
@@ -86,7 +92,7 @@ export default {
   },
   computed: {
     projectList() {
-      const searchTerms = this.$store.state.search.openshift
+      const searchTerms = this.$store.state.dashboards.openshift.search
         .toLowerCase()
         .split(',')
 
@@ -108,6 +114,9 @@ export default {
       this.refresh()
     }, this.$env.OPENSHIFT_REFRESH_INTERVAL)
   },
+  updated() {
+    this.$nextTick(() => this.$emit('updated'))
+  },
   methods: {
     async refresh() {
       try {
@@ -115,8 +124,6 @@ export default {
         this.projects = await Project.all()
         this.last_update = new Date()
       } catch (error) {
-        console.log(error)
-
         let msg = error.response ? error.response.data : error.message
         msg += `. Retrying again in ${this.$env.OPENSHIFT_REFRESH_INTERVAL /
           1000} seconds (failed retries: ${++this.retries}).`
@@ -125,7 +132,7 @@ export default {
       }
     },
     setSearch(value) {
-      this.$store.dispatch('set_search', { openshift: value })
+      this.$store.dispatch('dashboards/set_search', { openshift: value })
     }
   }
 }

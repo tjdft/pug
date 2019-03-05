@@ -5,7 +5,7 @@
     </span>
 
     <v-menu
-      v-if="!$store.state.tv_mode && projects.length > 0"
+      v-if="!$store.state.tv.fullscreen && projects.length > 0"
       v-model="menu"
       :close-on-content-click="false"       
       :bottom="true"             
@@ -18,7 +18,7 @@
       <v-card :width="400">
         <v-card-text>
           <v-select
-            :value="$store.state.tags.sentry"
+            :value="$store.state.dashboards.sentry.tags"
             :items="tags"
             label="tags"
             prepend-inner-icon="label"                            
@@ -28,7 +28,7 @@
             @input="setTags"
           />
           <v-text-field
-            :value="$store.state.search.sentry"
+            :value="$store.state.dashboards.sentry.search"
             label="search"
             prepend-inner-icon="search"                
             persistent-hint    
@@ -49,7 +49,7 @@
         {{ error }}
       </v-alert>
       <v-layout row wrap>
-        <v-flex v-for="project in projectList" :key="project.id" lg3 xl2 xs12>
+        <v-flex v-for="project in projectList" :key="project.id" :class="`xs${columnSize}`">          
           <sentry-app-card :project="project" />
         </v-flex>
       </v-layout>
@@ -60,10 +60,10 @@
     </v-container>
     <div v-if="projects.length > 0 && projectList.length > 0" class="pt-2">
       <small class="success--text pr-2">
-        <strong>all fine</strong>
+        <strong>no issues</strong>
       </small>
       <small class="error--text pr-2">
-        <strong>has unsolved issues by 14 days</strong>
+        <strong>has issues by last 14 days</strong>
       </small>
     </div>
   </v-content>
@@ -78,6 +78,12 @@ import SentryAppCard from '@/dashboards/sentry/components/SentryAppCard'
 
 export default {
   components: { SentryAppCard },
+  props: {
+    columnSize: {
+      type: Number,
+      default: 3
+    }
+  },
   data() {
     return {
       menu: false,
@@ -89,8 +95,8 @@ export default {
   },
   computed: {
     projectList() {
-      const selectedTags = this.$store.state.tags.sentry
-      const searchTerms = this.$store.state.search.sentry
+      const selectedTags = this.$store.state.dashboards.sentry.tags
+      const searchTerms = this.$store.state.dashboards.sentry.search
         .toLowerCase()
         .split(',')
 
@@ -129,6 +135,9 @@ export default {
       this.refresh()
     }, this.$env.SENTRY_REFRESH_INTERVAL)
   },
+  updated() {
+    this.$nextTick(() => this.$emit('updated'))
+  },
   methods: {
     async refresh() {
       try {
@@ -136,8 +145,6 @@ export default {
         this.projects = await Project.all()
         this.last_update = new Date()
       } catch (error) {
-        console.log(error)
-
         let msg = error.response ? error.response.data : error.message
         msg += `. Retrying again in ${this.$env.SENTRY_REFRESH_INTERVAL /
           1000} seconds (failed retries: ${++this.retries}).`
@@ -146,10 +153,10 @@ export default {
       }
     },
     setTags(tags) {
-      this.$store.dispatch('set_tags', { sentry: tags })
+      this.$store.dispatch('dashboards/set_tags', { sentry: tags })
     },
     setSearch(value) {
-      this.$store.dispatch('set_search', { sentry: value })
+      this.$store.dispatch('dashboards/set_search', { sentry: value })
     }
   }
 }

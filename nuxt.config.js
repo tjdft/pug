@@ -40,7 +40,15 @@ module.exports = {
   */
   router: {
     parseQuery: function(q) {
-      return require('qs').parse(q)
+      return require('qs').parse(q, {
+        decoder: function(value) {
+          if (value === 'true' || value === 'false') {
+            return value === 'true'
+          }
+
+          return value === '0' ? 0 : parseInt(value) || value
+        }
+      })
     },
     stringifyQuery: function(q) {
       return require('qs').stringify(q, {
@@ -73,10 +81,6 @@ module.exports = {
       'nuxt-env',
       {
         keys: [
-          'TV_MODE',
-          'TV_DASHBOARDS',
-          'TV_VIEW',
-          'TV_TRANSITION_INTERVAL',
           'TV_QUERY',
           'OPENSHIFT_URL',
           'OPENSHIFT_REFRESH_INTERVAL',

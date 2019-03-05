@@ -1,66 +1,56 @@
 <template>
-  <v-content>
-    <v-layout v-if="$store.state.tv_view === 'all'" row wrap>
-      <v-flex v-for="dashboard in dashboards" :key="dashboard" xs12>
-        <dashboard :type="dashboard" class="mb-5" />
-      </v-flex>
-    </v-layout>
-
-    <v-layout v-if="$store.state.tv_view === 'carousel'">
-      <v-item-group
-
-        v-show="!$store.state.tv_mode && $vuetify.breakpoint.lgAndUp"
-        v-model="window"
-        class="shrink mr-4"
-        mandatory
-        tag="v-flex"
+  <v-content>    
+    <no-ssr>
+      <grid-layout          
+        :layout="layout"
+        :col-num="64"        
+        :row-height="40"
+        :is-draggable="$store.state.tv.editing"
+        :is-resizable="$store.state.tv.editing"
+        :margin="[30, 10]"     
+        @layout-updated="layoutUpdated"
       >
-        <v-item v-for="dashboard in dashboards" :key="dashboard">
-          <div slot-scope="{ active, toggle }">
-            <v-btn :input-value="active" icon class="mt-0" @click="toggle">
-              <v-icon>fiber_manual_record</v-icon>
-            </v-btn>
-          </div>
-        </v-item>      
-      </v-item-group>
-      <v-flex>
-        <v-window v-model="window">
-          <v-window-item v-for="dashboard in dashboards" :key="dashboard">
-            <dashboard :type="dashboard" />
-          </v-window-item>        
-        </v-window>
-      </v-flex>
-    </v-layout>   
+        <grid-item
+          v-for="item in layout"
+          :key="item.i"                    
+          :x="item.x"
+          :y="item.y"
+          :w="item.w"
+          :h="item.h"        
+          :i="item.i"                           
+          :class="{itemEditing: $store.state.tv.editing}"            
+        >          
+          <dashboard :type="item.i" :w="item.w" />
+        </grid-item>
+      </grid-layout>
+    </no-ssr>
   </v-content>
 </template>
 
 <script>
-// COMPONENTS
+import cloneDeep from 'lodash/cloneDeep'
 import Dashboard from '@/dashboards/dashboard'
 
 export default {
   components: { Dashboard },
   data() {
     return {
-      window: 0
-    }
-  },
-  computed: {
-    dashboards() {
-      return this.$store.state.tv_dashboards
+      layout: []
     }
   },
   mounted() {
-    setInterval(() => {
-      if (this.$store.state.tv_mode) {
-        this.next()
-      }
-    }, this.$env.TV_TRANSITION_INTERVAL)
+    this.layout = cloneDeep(this.$store.getters['dashboards/layout'])
   },
   methods: {
-    next() {
-      this.window++
+    layoutUpdated(newLayout) {
+      this.$store.dispatch('dashboards/set_layout', cloneDeep(newLayout))
     }
   }
 }
 </script>
+<style>
+.itemEditing {
+  border: 2px dashed #c0c0c0 !important;
+  padding: 10px !important;
+}
+</style>

@@ -1,14 +1,29 @@
 <template>
   <v-app>
     <!-- toolbar -->
-    <v-toolbar v-if="showToolbar" color="white" flat dense>
+    <v-toolbar v-show="showToolbar" color="white" flat dense>
       <!-- toolbar title -->
       <v-toolbar-title>
         <img src="~static/pug.png" height="30" title="pug" style="vertical-align: bottom">
         <strong>PUG</strong>
       </v-toolbar-title>
       <v-spacer />
-      <v-toolbar-items>        
+      <v-toolbar-items>      
+        <v-btn flat @click="$store.dispatch('tv/toogle_editing')">
+          <span v-if="!$store.state.tv.editing">
+            <v-icon>
+              dashboard
+            </v-icon>
+            layout 
+          </span>
+          <span v-else>
+            <v-icon color="success">
+              check
+            </v-icon>
+            apply
+          </span>
+        </v-btn>  
+          
         <v-menu
           v-model="menu"
           :close-on-content-click="false"
@@ -21,29 +36,21 @@
           <v-card>
             <v-card-text>              
               <v-select
-                :items="$store.state.options.dashboards"
-                :value="$store.state.tv_dashboards"
+                :items="$store.getters['dashboards/list']"
+                :value="$store.getters['dashboards/enabled']"
                 prepend-icon="dashboard"
                 hint="Dashboards to be displayed"
                 persistent-hint
                 multiple
-                @change="setTvDashboards"
+                @change="setDashboards"
               />
 
-              <v-select
-                :items="$store.state.options.views"
-                :value="$store.state.tv_view"
-                prepend-icon="view_carousel"
-                hint="View mode"
-                persistent-hint                
-                @change="setTvView"
-              />
               <v-switch
-                :input-value="!!$store.state.tv_mode"
+                :input-value="!!$store.state.tv.fullscreen"
                 hint="Full screen mode"
                 persistent-hint
                 prepend-icon="live_tv"
-                @change="setTvMode"
+                @change="setTvFullscreen"
               />
             </v-card-text>           
           </v-card>
@@ -53,7 +60,7 @@
 
     <!-- content -->
     <v-content class="grey lighten-3">
-      <v-container fill-height fluid>
+      <v-container fill-height fluid class="px-0">
         <v-layout child-flex>
           <!-- render pages -->
           <nuxt />
@@ -78,7 +85,7 @@ export default {
     return {
       menu: false,
       mouse_moved_at: new Date(),
-      showToolbar: !this.$store.state.tv_mode
+      showToolbar: !this.$store.state.tv.fullscreen
     }
   },
   mounted() {
@@ -88,7 +95,7 @@ export default {
         const now = this.$moment()
         const movedAt = this.$moment(this.mouse_moved_at)
 
-        if (now.diff(movedAt) > 3000 && this.$store.state.tv_mode) {
+        if (now.diff(movedAt) > 3000 && this.$store.state.tv.fullscreen) {
           this.showToolbar = false
         }
       }, 3000)
@@ -97,27 +104,13 @@ export default {
     })
   },
   methods: {
-    setTvMode(mode) {
-      let message
+    setTvFullscreen(mode) {
+      this.showToolbar = mode
 
-      if (mode) {
-        message = '"TV MODE" ON: Panels will switch automatically'
-        this.showToolbar = false
-      } else {
-        message = '"TV MODE" OFF: Panels will not switch automatically'
-      }
-
-      if (this.$store.state.tv_view === 'carousel') {
-        this.$toast.show(message)
-      }
-
-      this.$store.dispatch('set_tv_mode', mode)
+      this.$store.dispatch('tv/set_fullscreen', mode)
     },
-    setTvDashboards(value) {
-      this.$store.dispatch('set_tv_dashboards', value)
-    },
-    setTvView(value) {
-      this.$store.dispatch('set_tv_view', value)
+    setDashboards(dashboards) {
+      this.$store.dispatch('dashboards/toggle', dashboards)
     }
   }
 }

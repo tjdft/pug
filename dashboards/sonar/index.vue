@@ -4,7 +4,7 @@
       <strong>SonarQube</strong>
     </span>
     <v-menu
-      v-if="!$store.state.tv_mode && projects.length > 0"
+      v-if="!$store.state.tv.fullscreen && projects.length > 0"
       v-model="menu"
       :close-on-content-click="false"       
       :bottom="true"             
@@ -17,7 +17,7 @@
       <v-card :width="400">
         <v-card-text>
           <v-select
-            :value="$store.state.tags.sonar"
+            :value="$store.state.dashboards.sonar.tags"
             :items="tags"
             label="tags"
             prepend-inner-icon="label"                            
@@ -27,7 +27,7 @@
             @input="setTags"
           />
           <v-text-field
-            :value="$store.state.search.sonar"
+            :value="$store.state.dashboards.sonar.search"
             label="search"
             prepend-inner-icon="search"                
             persistent-hint    
@@ -48,7 +48,7 @@
         {{ error }}
       </v-alert>
       <v-layout row wrap>
-        <v-flex v-for="project in projectList" :key="project.id" lg3 xl2 xs12>
+        <v-flex v-for="project in projectList" :key="project.id" :class="`xs${columnSize}`">
           <sonar-app-card :project="project" />
         </v-flex>
       </v-layout>
@@ -106,6 +106,12 @@ import SonarAppCard from '@/dashboards/sonar/components/SonarAppCard'
 
 export default {
   components: { SonarAppCard },
+  props: {
+    columnSize: {
+      type: Number,
+      default: 3
+    }
+  },
   data() {
     return {
       menu: false,
@@ -117,8 +123,8 @@ export default {
   },
   computed: {
     projectList() {
-      const selectedTags = this.$store.state.tags.sonar
-      const searchTerms = this.$store.state.search.sonar
+      const selectedTags = this.$store.state.dashboards.sonar.tags
+      const searchTerms = this.$store.state.dashboards.sonar.search
         .toLowerCase()
         .split(',')
 
@@ -154,6 +160,9 @@ export default {
       this.refresh()
     }, this.$env.SONAR_REFRESH_INTERVAL)
   },
+  updated() {
+    this.$nextTick(() => this.$emit('updated'))
+  },
   methods: {
     async refresh() {
       try {
@@ -169,10 +178,10 @@ export default {
       }
     },
     setTags(tags) {
-      this.$store.dispatch('set_tags', { sonar: tags })
+      this.$store.dispatch('dashboards/set_tags', { sonar: tags })
     },
     setSearch(value) {
-      this.$store.dispatch('set_search', { sonar: value })
+      this.$store.dispatch('dashboards/set_search', { sonar: value })
     }
   }
 }

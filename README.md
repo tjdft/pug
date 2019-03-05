@@ -19,8 +19,8 @@ PUG is a frontend app only. It intends exclusively to display dashboards on your
 ### Sentry
 
 
-- **red**: it has "unsolved issues" by last 14 days
-- **green**: all fine!
+- **red**: has issues by last 14 days
+- **green**: no issues
 
 ### Openshift 
 
@@ -128,8 +128,7 @@ This is the simplest strategy to deploy. This image already contains Nginx and N
 docker run -it -p 8080:8080 --env-file=path/to/.env tjdft/pug
 ```
 
-
-
 ## TODO
 
-- Custom layout
+- Toggle "summary" (numbers) from blocks.
+- Redmine
