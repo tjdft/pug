@@ -60,7 +60,7 @@
 
     <!-- content -->
     <v-content class="grey lighten-3">
-      <v-container fill-height fluid class="px-0">
+      <v-container fill-height fluid class="pa-0">
         <v-layout child-flex>
           <!-- render pages -->
           <nuxt />

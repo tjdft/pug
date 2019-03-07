@@ -1,5 +1,5 @@
 <template>
-  <v-content>    
+  <div>
     <no-ssr>
       <grid-layout          
         :layout="layout"
@@ -7,8 +7,8 @@
         :row-height="40"
         :is-draggable="$store.state.tv.editing"
         :is-resizable="$store.state.tv.editing"
-        :margin="[30, 10]"     
-        @layout-updated="layoutUpdated"
+        :margin="[30, 30]"     
+        @layout-updated="layoutUpdated"        
       >
         <grid-item
           v-for="item in layout"
@@ -24,7 +24,7 @@
         </grid-item>
       </grid-layout>
     </no-ssr>
-  </v-content>
+  </div>
 </template>
 
 <script>
@@ -51,6 +51,5 @@ export default {
 <style>
 .itemEditing {
   border: 2px dashed #c0c0c0 !important;
-  padding: 10px !important;
 }
 </style>

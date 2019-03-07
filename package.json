@@ -22,7 +22,7 @@
     "lodash": "^4.17.11",
     "nuxt": "^2.4.3",
     "nuxt-env": "^0.0.4",
-    "vue-grid-layout": "^2.3.3",
+    "vue-grid-layout": "^2.3.4",
     "vuetify": "^1.5.0",
     "vuetify-loader": "^1.2.0"
   },

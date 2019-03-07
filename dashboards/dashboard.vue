@@ -1,8 +1,8 @@
 <template>
   <div>
-    <strong v-show="$store.state.tv.editing">
-      {{ type }}
-    </strong>  
+    <div v-show="$store.state.tv.editing" class="pa-2">
+      <strong>{{ type }}</strong>
+    </div>  
     <component :is="component" v-if="component && !$store.state.tv.editing" :column-size="columnSize" @updated="autoSize" />
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
   },
   updated() {
     // When childs re-renders just autosize vue-grid-layout
-    this.$nextTick(() => this.$parent.autoSize())
+    this.$nextTick(() => this.autoSize())
   },
   mounted() {
     this.loader()
