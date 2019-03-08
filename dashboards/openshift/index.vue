@@ -15,7 +15,7 @@
         </v-icon>
       </v-btn>
       <v-card :width="400">
-        <v-card-text>      
+        <v-card-text>               
           <v-text-field
             :value="$store.state.dashboards.openshift.search"
             label="search"
@@ -23,6 +23,15 @@
             persistent-hint    
             hint="You can search with a comma separated list"
             @input="setSearch"
+          />
+          <v-switch
+            :input-value="$store.state.dashboards.openshift.summary"
+            :false-value="false"
+            :true-value="true"
+            hint="Display summary"
+            persistent-hint
+            prepend-icon="line_style"
+            @change="setSummary"
           />
         </v-card-text>
         <v-card-actions>
@@ -33,20 +42,20 @@
         </v-card-actions>
       </v-card>
     </v-menu>
-    <v-container fluid grid-list-md class="pa-0 mt-2">
-      <v-alert type="error" :value="error" class="mb-4">
-        {{ error }}
-      </v-alert>
+    <v-alert type="error" :value="error" class="mb-4">
+      {{ error }}
+    </v-alert>
+    <v-container fluid grid-list-md class="pa-0 mt-2">      
       <v-layout row wrap>
         <v-flex v-for="project in projectList" :key="project.metadata.uid" :class="`xs${columnSize}`">
           <openshift-app-card :project="project" />
         </v-flex>
-      </v-layout>
-      <v-progress-linear v-if="projects.length === 0 && !error" indeterminate />
-      <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 text-xs-center">
-        Nothing here.
-      </div>
+      </v-layout>      
     </v-container>
+    <v-progress-linear v-if="projects.length === 0 && !error" indeterminate />
+    <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 text-xs-center">
+      Nothing here.
+    </div>
     <div v-if="projects.length > 0 && projectList.length > 0" class="pt-2">
       <small class="success--text pr-2">
         <strong>all fine</strong>
@@ -74,6 +83,7 @@ import Project from '@/dashboards/openshift/models/Project'
 import OpenshiftAppCard from '@/dashboards/openshift/components/OpenshiftAppCard'
 
 export default {
+  name: 'DashboardOpenshift',
   components: { OpenshiftAppCard },
   props: {
     columnSize: {
@@ -131,8 +141,15 @@ export default {
         this.error = msg
       }
     },
-    setSearch(value) {
-      this.$store.dispatch('dashboards/set_search', { openshift: value })
+    setSearch(search) {
+      this.$store.dispatch('dashboards/set_search', { openshift: search })
+    },
+    setSummary(summary) {
+      console.log(summary)
+      this.$store.dispatch('dashboards/set_summary', {
+        dashboard: 'openshift',
+        summary
+      })
     }
   }
 }

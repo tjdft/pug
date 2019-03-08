@@ -1,19 +1,13 @@
 <template>
   <div>
-    <v-card
-      flat
-      height="100%"
-      :color="color"
-      :href="`${$env.SONAR_URL}/dashboard?id=${project.key}`"
-      target="_blank"
-    >
-      <v-card-title class="title pb-0">
+    <v-card flat height="100%" :color="color" :href="`${$env.SONAR_URL}/dashboard?id=${project.key}`" target="_blank">
+      <v-card-title class="title">
         <div class="text-truncate white--text">
           <strong>{{ project.name }}</strong>
         </div>
       </v-card-title>
-      <v-card-text>
-        <div class="text-truncate sumary">        
+      <v-card-text v-if="$store.state.dashboards.sonar.summary" class="pt-0">
+        <div class="text-truncate summary">        
           <v-chip disabled class="pa-0 ma-0 transparent white--text" small flat label>
             <v-icon style="font-size: 12pt" small>
               bug_report
@@ -51,6 +45,7 @@
 </template>
 <script>
 export default {
+  name: 'SonarAppCard',
   props: {
     project: {
       type: Object,

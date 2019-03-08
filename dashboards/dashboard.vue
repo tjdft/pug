@@ -8,6 +8,7 @@
 </template>
 <script>
 export default {
+  name: 'Dashboard',
   props: {
     type: {
       type: String,

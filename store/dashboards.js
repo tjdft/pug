@@ -5,18 +5,21 @@ export const state = () => ({
     tags: [],
     search: '',
     enabled: true,
+    summary: true,
     layout: { x: 0, y: 0, w: 64, h: 3, i: 'sonar' }
   },
   sentry: {
     tags: [],
     search: '',
     enabled: true,
+    summary: true,
     layout: { x: 2, y: 0, w: 64, h: 3, i: 'sentry' }
   },
   openshift: {
     tags: [],
     search: '',
     enabled: true,
+    summary: false,
     layout: { x: 4, y: 0, w: 64, h: 3, i: 'openshift' }
   }
 })
@@ -57,6 +60,10 @@ export const mutations = {
     })
   },
 
+  SET_SUMMARY(state, payload) {
+    state[payload.dashboard].summary = payload.summary
+  },
+
   TOGGLE(state, dashboards) {
     Object.keys(state).forEach(key => {
       state[key].enabled = dashboards.includes(key)
@@ -90,6 +97,11 @@ export const actions = {
 
   set_layout({ commit, dispatch }, payload) {
     commit('SET_LAYOUT', payload)
+    dispatch('set_query_string', null, { root: true })
+  },
+
+  set_summary({ commit, dispatch }, payload) {
+    commit('SET_SUMMARY', payload)
     dispatch('set_query_string', null, { root: true })
   },
 

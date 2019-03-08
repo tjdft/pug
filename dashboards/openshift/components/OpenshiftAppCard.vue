@@ -1,23 +1,18 @@
 <template>
-  <v-card
-    :color="color"
-    dark
-    flat
-    :href="`${$env.OPENSHIFT_URL}/console/project/${project.metadata.name}`"
-    target="_blank"
-  >
+  <v-card :color="color" dark flat :href="`${$env.OPENSHIFT_URL}/console/project/${project.metadata.name}`" target="_blank">
     <v-card-title class="title">
       <div class="text-truncate white--text">
         <strong>{{ project.metadata.annotations['openshift.io/display-name'] }}</strong>
       </div>
     </v-card-title>
-    <v-card-text>      
-      <div class="text-truncate sumary" />
+    <v-card-text v-if="$store.state.dashboards.openshift.summary" class="pt-0">      
+      <div class="text-truncate summary" />
     </v-card-text>
   </v-card>
 </template>
 <script>
 export default {
+  name: 'OpenshiftAppCard',
   props: {
     project: {
       type: Object,

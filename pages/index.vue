@@ -4,7 +4,7 @@
       <grid-layout          
         :layout="layout"
         :col-num="64"        
-        :row-height="40"
+        :row-height="5"
         :is-draggable="$store.state.tv.editing"
         :is-resizable="$store.state.tv.editing"
         :margin="[30, 30]"     
@@ -43,7 +43,9 @@ export default {
   },
   methods: {
     layoutUpdated(newLayout) {
-      this.$store.dispatch('dashboards/set_layout', cloneDeep(newLayout))
+      if (this.$store.state.tv.editing) {
+        this.$store.dispatch('dashboards/set_layout', cloneDeep(newLayout))
+      }
     }
   }
 }

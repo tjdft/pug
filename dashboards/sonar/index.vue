@@ -15,12 +15,14 @@
         </v-icon>
       </v-btn>
       <v-card :width="400">
-        <v-card-text>
+        <v-card-text>          
           <v-select
             :value="$store.state.dashboards.sonar.tags"
             :items="tags"
             label="tags"
-            prepend-inner-icon="label"                            
+            prepend-icon="label"   
+            persistent-hint    
+            hint="Filter by tags"                         
             clearable
             multiple
             chips                
@@ -29,10 +31,19 @@
           <v-text-field
             :value="$store.state.dashboards.sonar.search"
             label="search"
-            prepend-inner-icon="search"                
+            prepend-icon="search"                
             persistent-hint    
             hint="You can search with a comma separated list"
             @input="setSearch"
+          />
+          <v-switch
+            :input-value="$store.state.dashboards.sonar.summary"
+            :false-value="false"
+            :true-value="true"
+            hint="Display summary"
+            persistent-hint
+            prepend-icon="line_style"
+            @change="setSummary"
           />
         </v-card-text>
         <v-card-actions>
@@ -43,20 +54,20 @@
         </v-card-actions>
       </v-card>
     </v-menu>    
-    <v-container fluid grid-list-md class="pa-0 mt-2">
-      <v-alert type="error" :value="error" class="mb-4">
-        {{ error }}
-      </v-alert>
+    <v-alert type="error" :value="error" class="mb-4">
+      {{ error }}
+    </v-alert>
+    <v-container fluid grid-list-md class="pa-0 mt-2">      
       <v-layout row wrap>
         <v-flex v-for="project in projectList" :key="project.id" :class="`xs${columnSize}`">
           <sonar-app-card :project="project" />
         </v-flex>
-      </v-layout>
-      <v-progress-linear v-if="projects.length === 0 && !error" indeterminate />
-      <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 text-xs-center">
-        Nothing here.
-      </div>
+      </v-layout>      
     </v-container>
+    <v-progress-linear v-if="projects.length === 0 && !error" indeterminate />
+    <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 text-xs-center">
+      Nothing here.
+    </div>
     <div v-if="projects.length > 0 && projectList.length > 0" class="pt-2">
       <small class="success--text pr-2">
         <strong>excelent</strong>
@@ -105,6 +116,7 @@ import Project from '@/dashboards/sonar/models/Project'
 import SonarAppCard from '@/dashboards/sonar/components/SonarAppCard'
 
 export default {
+  name: 'DashboardSonar',
   components: { SonarAppCard },
   props: {
     columnSize: {
@@ -180,8 +192,15 @@ export default {
     setTags(tags) {
       this.$store.dispatch('dashboards/set_tags', { sonar: tags })
     },
-    setSearch(value) {
-      this.$store.dispatch('dashboards/set_search', { sonar: value })
+    setSearch(search) {
+      this.$store.dispatch('dashboards/set_search', { sonar: search })
+    },
+    setSummary(summary) {
+      console.log(summary)
+      this.$store.dispatch('dashboards/set_summary', {
+        dashboard: 'sonar',
+        summary
+      })
     }
   }
 }

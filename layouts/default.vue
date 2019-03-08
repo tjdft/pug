@@ -46,7 +46,9 @@
               />
 
               <v-switch
-                :input-value="!!$store.state.tv.fullscreen"
+                :input-value="$store.state.tv.fullscreen"
+                :false-value="false"
+                :true-value="true"
                 hint="Full screen mode"
                 persistent-hint
                 prepend-icon="live_tv"
