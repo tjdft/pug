@@ -104,7 +104,7 @@
         flip_to_front
       </v-icon>
       <small>duplications</small>
-    </div>
+    </div>    
   </v-content>
 </template>
 
