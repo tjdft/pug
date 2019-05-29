@@ -1,7 +1,7 @@
 <template>
   <div>
     component
-    <v-btn>aaa</v-btn>
+    <v-btn>asdaaa</v-btn>
     <v-chip>llllll</v-chip>
     <v-chip>llllll2ff</v-chip>
   </div>

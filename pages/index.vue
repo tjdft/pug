@@ -6,11 +6,11 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-import Logo from "@/components/Logo.vue";
 
 @Component({
   components: {
-    Logo
+    // TODO se falhar , mover para import padrão
+    Logo: () => import("@/components/Logo.vue")
   }
 })
 export default class IndexPage extends Vue {
@@ -18,6 +18,7 @@ export default class IndexPage extends Vue {
 
   mounted() {
     console.log(11);
+    this.name = "Joe";
     this.$axios.get("abc");
   }
 }

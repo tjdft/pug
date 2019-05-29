@@ -1,5 +1,4 @@
 import NuxtConfiguration from '@nuxt/config'
-// import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 
 const config: NuxtConfiguration = {
   mode: 'spa',
@@ -27,24 +26,7 @@ const config: NuxtConfiguration = {
   ],
   devModules: [
     '@nuxtjs/vuetify'
-  ],
-  // plugins: [
-  //   '@/plugins/vuetify'
-  // ],
-  // build: {
-  //   transpile: [/^vuetify/],
-  //   plugins: [new VuetifyLoaderPlugin()],
-  //   loaders: {
-  //     sass: {
-  //       implementation: require('sass'),
-  //       fiber: require('fibers')
-  //     },
-  //     scss: {
-  //       implementation: require('sass'),
-  //       fiber: require('fibers')
-  //     }
-  //   },
-  // }
+  ]
 }
 
 export default config
