@@ -1,4 +1,11 @@
 $body-font-family: 'Muli' !important;
 @import '~vuetify/src/styles/main.sass';
 
-// Custom style here
+.project-item{
+    font-size: 40pt;
+    font-weight: bold;
+}
+
+.project-item .v-icon{
+    font-size: 35pt;
+}
