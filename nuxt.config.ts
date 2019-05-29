@@ -1,5 +1,5 @@
 import NuxtConfiguration from '@nuxt/config'
-import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
+// import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
 
 const config: NuxtConfiguration = {
   mode: 'spa',
@@ -25,23 +25,26 @@ const config: NuxtConfiguration = {
   modules: [
     '@nuxtjs/axios'
   ],
-  plugins: [
-    '@/plugins/vuetify'
+  devModules: [
+    '@nuxtjs/vuetify'
   ],
-  build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
-    loaders: {
-      sass: {
-        implementation: require('sass'),
-        fiber: require('fibers')
-      },
-      scss: {
-        implementation: require('sass'),
-        fiber: require('fibers')
-      }
-    },
-  }
+  // plugins: [
+  //   '@/plugins/vuetify'
+  // ],
+  // build: {
+  //   transpile: [/^vuetify/],
+  //   plugins: [new VuetifyLoaderPlugin()],
+  //   loaders: {
+  //     sass: {
+  //       implementation: require('sass'),
+  //       fiber: require('fibers')
+  //     },
+  //     scss: {
+  //       implementation: require('sass'),
+  //       fiber: require('fibers')
+  //     }
+  //   },
+  // }
 }
 
 export default config

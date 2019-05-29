@@ -28,7 +28,7 @@
       "@types/node",
       "@nuxt/vue-app",
       "@nuxtjs/axios",
-      "vuetify"
+      // "vuetify"
     ]
   }
 }
