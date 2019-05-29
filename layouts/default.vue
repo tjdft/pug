@@ -1,9 +1,11 @@
 <template>
-  <v-app>
-    <v-content class="grey lighten-3">
-      <v-container fluid>
-        <v-icon>home</v-icon>
-        <nuxt />
+  <v-app dark>
+    <v-content>
+      <v-container fill-height fluid class="pa-0">
+        <v-layout child-flex>
+          <!-- render pages -->
+          <nuxt />
+        </v-layout>
       </v-container>
     </v-content>
   </v-app>
