@@ -20,7 +20,7 @@ module.exports = {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Nunito:300,400,500,700|Material+Icons'
+          'https://fonts.googleapis.com/css?family=Muli:300,400,500,700|Material+Icons'
       }
     ]
   },
@@ -39,9 +39,9 @@ module.exports = {
   ** Router
   */
   router: {
-    parseQuery: function(q) {
+    parseQuery: function (q) {
       return require('qs').parse(q, {
-        decoder: function(value) {
+        decoder: function (value) {
           if (value === 'true' || value === 'false') {
             return value === 'true'
           }
@@ -50,7 +50,7 @@ module.exports = {
         }
       })
     },
-    stringifyQuery: function(q) {
+    stringifyQuery: function (q) {
       return require('qs').stringify(q, {
         encode: false,
         addQueryPrefix: true

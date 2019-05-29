@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <!-- toolbar -->
     <v-toolbar v-show="showToolbar" color="white" flat dense>
       <!-- toolbar title -->
@@ -61,7 +61,7 @@
     </v-toolbar>
 
     <!-- content -->
-    <v-content class="grey lighten-3">
+    <v-content>
       <v-container fill-height fluid class="pa-0">
         <v-layout child-flex>
           <!-- render pages -->

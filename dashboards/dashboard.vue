@@ -65,6 +65,7 @@ export default {
         size = 12
       }
 
+      size = 4
       this.columnSize = size
     },
     autoSize() {

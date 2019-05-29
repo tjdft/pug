@@ -1,44 +1,36 @@
 <template>
   <div>
-    <v-card flat height="100%" :color="color" :href="`${$env.SONAR_URL}/dashboard?id=${project.key}`" target="_blank">
+    <v-card flat height="100%" color="transparent" :href="`${$env.SONAR_URL}/dashboard?id=${project.key}`" class="px-5 mb-5">
       <v-card-title class="title">
         <div class="text-truncate white--text">
-          <strong>{{ project.name }}</strong>
+          <strong style="font-size: 40pt; font-weight: 800">{{ project.name.toUpperCase() }}</strong>
         </div>
       </v-card-title>
-      <v-card-text v-if="$store.state.dashboards.sonar.summary" class="pt-0">
-        <div class="text-truncate summary">        
-          <v-chip disabled class="pa-0 ma-0 transparent white--text" small flat label>
-            <v-icon style="font-size: 12pt" small>
-              bug_report
-            </v-icon>
-            <small>{{ project.metrics.bugs || '-' }}</small>
-          </v-chip>
-          <v-chip disabled class="pa-0 ma-0 transparent white--text" small flat label>
-            <v-icon style="font-size: 10pt" small>
-              security
-            </v-icon>
-            <small>{{ project.metrics.vulnerabilities || '-' }}</small>
-          </v-chip>
-          <v-chip disabled class="pa-0 ma-0 transparent white--text" small flat label>
-            <v-icon style="font-size: 10pt" small>
-              error
-            </v-icon>
-            <small>{{ project.metrics.code_smells || '-' }}</small>
-          </v-chip>
-          <v-chip disabled class="pa-0 ma-0 transparent white--text" small flat label>
-            <v-icon style="font-size: 10pt" small>
-              donut_large
-            </v-icon>
-            <small>{{ project.metrics.coverage || '-' }}</small> %
-          </v-chip>
-          <v-chip disabled class="pa-0 ma-0 transparent white--text" small flat label>
-            <v-icon style="font-size: 10pt" small>
-              flip_to_front
-            </v-icon>
-            <small>{{ project.metrics.duplications || '-' }}</small> %
-          </v-chip>
-        </div>
+      <v-card-text v-if="$store.state.dashboards.sonar.summary" >
+        <v-layout row wrap >
+          <v-flex xs3 text-xs-center :class="project.metrics.bugs == 0 ? 'success' : 'error'" >
+        <p style="font-size: 50pt; margin: 0; font-weight: 800" >
+          <v-icon style="font-size: 50pt; margin-bottom: 5px" large>bug_report</v-icon>
+          {{ project.metrics.bugs }}</p>            
+          </v-flex>          
+          <v-flex xs3 text-xs-center :class="project.metrics.vulnerabilities == 0 ? 'success' : 'error'"  >
+            <p style="font-size: 50pt; margin: 0; font-weight: 800">
+              <v-icon style="font-size: 50pt; margin-bottom: 5px; margin-right: 20px" >warning</v-icon>{{ project.metrics.vulnerabilities  }}
+              </p>            
+          </v-flex>
+          <v-flex xs3 text-xs-center :class="project.metrics.code_smells == 0 ? 'success' : 'error'" >
+            <p style="font-size: 50pt; margin: 0; font-weight: 800">
+              <v-icon style="font-size: 50pt; margin-bottom: 5px; margin-right: 20px" >track_changes</v-icon>{{ project.metrics.code_smells }}
+              </p>            
+          </v-flex>
+          <v-flex xs3 text-xs-center class="grey darken-3" >
+            <p style="font-size: 50pt; margin: 0; font-weight: 800">
+              <v-icon style="font-size: 50pt; margin-bottom: 5px; margin-right: 20px" >donut_large</v-icon>{{ Math.floor(project.metrics.coverage) }}%
+              </p>            
+          </v-flex>
+        </v-layout>
+            
+                  
       </v-card-text>
     </v-card>
   </div>

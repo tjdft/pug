@@ -57,9 +57,9 @@
     <v-alert type="error" :value="error" class="mb-4">
       {{ error }}
     </v-alert>
-    <v-container fluid grid-list-md class="pa-0 mt-2">      
+    <v-container fluid grid-list-xl class="pa-0 mt-2">      
       <v-layout row wrap>
-        <v-flex v-for="project in projectList" :key="project.id" :class="`xs${columnSize}`">
+        <v-flex v-for="project in projectList" :key="project.id" class="xs6">
           <sonar-app-card :project="project" />
         </v-flex>
       </v-layout>      
@@ -68,42 +68,26 @@
     <div v-if="projects.length > 0 && projectList.length === 0" class="display-1 text-xs-center">
       Nothing here.
     </div>
-    <div v-if="projects.length > 0 && projectList.length > 0" class="pt-2">
-      <small class="success--text pr-2">
-        <strong>excelent</strong>
-      </small>
-      <small class="error--text pr-2">
-        <strong>some bugs</strong>
-      </small>
-      
-      <small class="warning--text pr-2">
-        <strong>vulnerabilities/code smells</strong>
-      </small>
-
-      <v-icon small>
+    <div v-if="projects.length > 0 && projectList.length > 0" class="pt-2" style="color: #c0c0c0">  
+      <v-icon small style="font-size: 40pt">
         bug_report
       </v-icon>
-      <small>bugs</small>
+      <small style="font-size: 50pt">s-max bugs</small>      
 
-      <v-icon small>
-        security
+      <v-icon small style="font-size: 40pt; padding-left: 50px">
+        warning
       </v-icon>
-      <small>vulnerabilities</small>
+      <small style="font-size: 50pt; ">sentry issues</small>      
 
-      <v-icon small>
-        error
+      <v-icon small style="font-size: 40pt; padding-left: 50px">
+        track_changes
       </v-icon>
-      <small>code smells</small>
+      <small style="font-size: 50pt; ">sonar issues</small>      
 
-      <v-icon small>
+      <v-icon small style="font-size: 40pt; padding-left: 50px">
         donut_large
       </v-icon>
-      <small>coverage</small>
-
-      <v-icon small>
-        flip_to_front
-      </v-icon>
-      <small>duplications</small>
+      <small style="font-size: 50pt; ">test coverage</small>      
     </div>    
   </v-content>
 </template>
