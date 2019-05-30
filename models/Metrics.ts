@@ -5,25 +5,21 @@ import Project from "@/models/Project";
 import Model from "@/models/Model";
 
 export default class Metrics extends Model {
-    project: Project
+    project!: Project
     sonar: Sonar
     smax: Smax
     sentry: Sentry
 
     constructor(project: Project) {
         super()
-        this.project = project
-        this.sonar = new Sonar()
-        this.smax = new Smax()
-        this.sentry = new Sentry()
+        this.sonar = new Sonar(project)
+        this.smax = new Smax(project)
+        this.sentry = new Sentry(project)
     }
 
     public fetch() {
-        this.custom(`${this.project.id}/sonar`).get().then(result => {
-            this.sonar = new Sonar(result)
-        })
-
-        // this.smax = this.custom(`${this.project.id}/smax`).get()
-        // this.sentry = this.custom(`${this.project.id}/sentry`).get()
+        this.sonar.fetch()
+        this.sentry.fetch()
+        this.smax.fetch()
     }
 }

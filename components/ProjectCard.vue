@@ -6,16 +6,16 @@
     <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap>
         <v-flex xs3 class="pa-0">
-          <smax-bugs :bugs="project.metrics.smax.bugs" />
+          <smax-bugs :bugs="project.metrics.smax.bugs"/>
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sentry-issues :issues="project.metrics.sentry.issues" />
+          <sentry-issues :issues="project.metrics.sentry.issues"/>
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-issues :issues="project.metrics.sonar.issues" />
+          <sonar-issues :issues="project.metrics.sonar.issues"/>
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-quality :quality="project.metrics.sonar.quality" />
+          <sonar-coverage :coverage="project.metrics.sonar.coverage"/>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -28,16 +28,16 @@ import Project from "@/models/Project";
 @Component({
   components: {
     SonarIssues: () => import("@/components/sonar/SonarIssues.vue"),
-    SonarQuality: () => import("@/components/sonar/SonarQuality.vue"),
+    SonarCoverage: () => import("@/components/sonar/SonarCoverage.vue"),
     SentryIssues: () => import("@/components/sentry/SentryIssues.vue"),
     SmaxBugs: () => import("@/components/smax/SmaxBugs.vue")
   }
 })
 export default class ProjectCard extends Vue {
-  @Prop({ type: Project, required: true }) project
+  @Prop({ type: Project, required: true }) project;
 
   mounted() {
-    this.project.metrics.fetch()
+    this.project.metrics.fetch();
   }
 }
 </script>

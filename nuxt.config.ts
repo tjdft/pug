@@ -1,4 +1,5 @@
 import NuxtConfiguration from '@nuxt/config'
+require('dotenv').config()
 
 const config: NuxtConfiguration = {
   mode: 'spa',
@@ -19,7 +20,7 @@ const config: NuxtConfiguration = {
     ]
   },
   env: {
-    API_URL: "http://localhost:8080/"
+    API_URL: "http://localhost:8080"
   },
   css: [
     '@/assets/style/app.scss'
@@ -28,13 +29,56 @@ const config: NuxtConfiguration = {
     '@/plugins/vue-api-query'
   ],
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
   devModules: [
     '@nuxtjs/vuetify'
   ],
+  /**
+   * Axios module configuration
+   */
   axios: {
-    baseURL: process.env.API_URL
+    credentials: true,
+    proxy: true
+  },
+  proxy: {
+    '/sonar/': {
+      target: `${process.env.SONAR_URL}/api`,
+      pathRewrite: { '^/sonar': '' },
+      secure: false,
+      onProxyReq: proxyReq => {
+        // Sonar basic auth token need to be converted to base64
+        proxyReq.setHeader(
+          'Authorization',
+          `Basic ${Buffer.from(process.env.SONAR_TOKEN + ':', 'ascii').toString(
+            'base64'
+          )}`
+        )
+      }
+    },
+    '/openshift/': {
+      target: `${process.env.OPENSHIFT_URL}`,
+      pathRewrite: { '^/openshift': '' },
+      secure: false,
+      onProxyReq: proxyReq => {
+        proxyReq.setHeader(
+          'Authorization',
+          `Bearer ${process.env.OPENSHIFT_TOKEN}`
+        )
+      }
+    },
+    '/sentry/': {
+      target: `${process.env.SENTRY_URL}`,
+      pathRewrite: { '^/sentry': '' },
+      secure: false,
+      onProxyReq: proxyReq => {
+        proxyReq.setHeader(
+          'Authorization',
+          `Bearer ${process.env.SENTRY_TOKEN}`
+        )
+      }
+    }
   },
 }
 
