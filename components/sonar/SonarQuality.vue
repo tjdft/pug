@@ -12,7 +12,7 @@ export default class SonarQuality extends Vue {
   @Prop({ type: Number, required: false }) quality;
 
   get color() {
-    if (this.quality === null) {
+    if (this.quality === null || this.quality === undefined) {
       return 'grey'
     }
 

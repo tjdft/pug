@@ -19,8 +19,11 @@ export default class Metrics extends Model {
     }
 
     public fetch() {
-        this.sonar = this.custom(`${this.project.id}/sonar`).get()
-        this.smax = this.custom(`${this.project.id}/smax`).get()
-        this.sentry = this.custom(`${this.project.id}/sentry`).get()
+        this.custom(`${this.project.id}/sonar`).get().then(result => {
+            this.sonar = new Sonar(result)
+        })
+
+        // this.smax = this.custom(`${this.project.id}/smax`).get()
+        // this.sentry = this.custom(`${this.project.id}/sentry`).get()
     }
 }

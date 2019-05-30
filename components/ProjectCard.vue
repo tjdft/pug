@@ -1,5 +1,5 @@
 <template>
-  <v-card flat color="transparent" class="pa-3">
+  <v-card flat color="transparent" class="pt-3 px-2">
     <v-card-title class="pl-0">
       <h2>{{ project.name }}</h2>
     </v-card-title>
@@ -37,7 +37,7 @@ export default class ProjectCard extends Vue {
   @Prop({ type: Project, required: true }) project
 
   mounted() {
-    this.project.fetchMetrics()
+    this.project.metrics.fetch()
   }
 }
 </script>

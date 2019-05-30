@@ -12,7 +12,7 @@ export default class SmaxBugs extends Vue {
   @Prop({ type: Number, required: false }) bugs;
 
   get color() {
-    if (this.bugs === null) {
+    if (this.bugs === null || this.bugs === undefined) {
       return 'grey'
     }
 
