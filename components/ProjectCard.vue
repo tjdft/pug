@@ -6,16 +6,16 @@
     <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap>
         <v-flex xs3 class="pa-0">
-          <smax-bugs :bugs="project.smax.bugs" />
+          <smax-bugs :bugs="project.metrics.smax.bugs" />
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sentry-issues :issues="project.sentry.issues" />
+          <sentry-issues :issues="project.metrics.sentry.issues" />
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-issues :issues="project.sonar.issues" />
+          <sonar-issues :issues="project.metrics.sonar.issues" />
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-quality :quality="project.sonar.quality" />
+          <sonar-quality :quality="project.metrics.sonar.quality" />
         </v-flex>
       </v-layout>
     </v-card-text>
