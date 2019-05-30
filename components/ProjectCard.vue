@@ -1,7 +1,7 @@
 <template>
   <v-card flat color="transparent" class="pa-3">
     <v-card-title class="pl-0">
-      <h1>{{ project.name }}</h1>
+      <h2>{{ project.name }}</h2>
     </v-card-title>
     <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap>
@@ -37,7 +37,7 @@ export default class ProjectCard extends Vue {
   @Prop({ type: Project, required: true }) project
 
   mounted() {
-
+    this.project.fetchMetrics()
   }
 }
 </script>

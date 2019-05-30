@@ -19,7 +19,8 @@
     "cross-env": "^5.2.0",
     "lodash": "^4.17.11",
     "nuxt": "^2.7.1",
-    "ts-node": "^8.2.0"
+    "ts-node": "^8.2.0",
+    "vue-api-query": "^1.5.1"
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.7.1",

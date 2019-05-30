@@ -21,12 +21,18 @@ const config: NuxtConfiguration = {
   css: [
     '@/assets/style/app.scss'
   ],
+  plugins: [
+    '@/plugins/vue-api-query'
+  ],
   modules: [
     '@nuxtjs/axios'
   ],
   devModules: [
     '@nuxtjs/vuetify'
-  ]
+  ],
+  axios: {
+    baseURL: "http://localhost:8080/"
+  },  
 }
 
 export default config

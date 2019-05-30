@@ -7109,6 +7109,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-api-query@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/vue-api-query/-/vue-api-query-1.5.1.tgz#7abfd61f06fe3f22712c5c63bc101a53fd4147a8"
+  integrity sha512-9VAGugAe0idKZF7xmXzlOThvyBTpkv6YT4ihkbzwpIwLedCyLczr1LOKQ1m0qpK7EPFP4vHzN/zrY5HFfX/rMw==
+
 vue-class-component@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.0.1.tgz#7af2225c600667c7042b60712eefdf41dfc6de63"

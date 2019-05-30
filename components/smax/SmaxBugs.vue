@@ -9,9 +9,13 @@ import { Component, Vue, Prop } from "nuxt-property-decorator";
 
 @Component
 export default class SmaxBugs extends Vue {
-  @Prop({ type: Number, required: true }) bugs;
+  @Prop({ type: Number, required: false }) bugs;
 
   get color() {
+    if (this.bugs === null) {
+      return 'grey'
+    }
+
     return this.bugs === 0 ? 'success' : 'error'
   }
 }

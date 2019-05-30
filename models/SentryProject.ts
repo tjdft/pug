@@ -1,8 +1,11 @@
-export default class SentryProject{
-    issues: Number
+import Model from '@/models/Model'
+import MetricInterface from "@/models/MetricInterface";
 
-    constructor(issues: Number)
-    {
-        this.issues = issues    
+export default class SentryProject extends Model implements MetricInterface {
+    name: string = ''
+    issues: number | null = null
+
+    fetchMetrics(): void {
+        this.issues = 8
     }
 }

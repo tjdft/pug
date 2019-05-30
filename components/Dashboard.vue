@@ -21,8 +21,8 @@ export default class Dashboard extends Vue {
 
   mounted() {
     this.projects = [
-      new Project("digitometro-api"),
-      new Project("digitometro-web")
+      new Project({ id: 1, name: "digitometro-api" }),
+      new Project({ id: 2, name: "digitometro-web" })
     ];
   }
 }
