@@ -1,11 +1,18 @@
 $body-font-family: 'Muli' !important;
+
 @import '~vuetify/src/styles/main.sass';
 
 .project-item{
-    font-size: 40pt;
-    font-weight: bold;
+    padding: 15px 5px;
+    font-size: 20pt;
+    font-weight: 800;
 }
 
 .project-item .v-icon{
-    font-size: 35pt;
+    font-size: 20pt;
+    margin-bottom: 5px;
+}
+
+.theme--dark.v-card .v-card__text{
+    color: white !important;
 }

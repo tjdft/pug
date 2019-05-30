@@ -1,18 +1,20 @@
 <template>
-  <v-card flat>
-    <v-card-title> {{ project.name }} </v-card-title>
-    <v-card-text>
+  <v-card flat color="transparent" class="pa-3">
+    <v-card-title class="pl-0">
+      <h1>{{ project.name }}</h1>
+    </v-card-title>
+    <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap>
-        <v-flex xs3>
+        <v-flex xs3 class="pa-0">
           <smax-bugs :bugs="project.smax.bugs" />
         </v-flex>
-        <v-flex xs3>
+        <v-flex xs3 class="pa-0">
           <sentry-issues :issues="project.sentry.issues" />
         </v-flex>
-        <v-flex xs3>
+        <v-flex xs3 class="pa-0">
           <sonar-issues :issues="project.sonar.issues" />
         </v-flex>
-        <v-flex xs3>
+        <v-flex xs3 class="pa-0">
           <sonar-quality :quality="project.sonar.quality" />
         </v-flex>
       </v-layout>

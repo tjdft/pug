@@ -1,7 +1,7 @@
 <template>
-  <div class="project-item">
+  <div class="project-item grey darken-3">
     <v-icon>donut_large</v-icon>
-    {{ quality }}
+    {{ quality }} %
   </div>
 </template>
 <script lang="ts">

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid grid-list-xl>
+  <v-container fluid grid-list-xl class="pt-0">
     <v-layout row wrap>
       <v-flex md6 xs12 v-for="project in projects" :key="project.name">
         <project-card :project="project" />
