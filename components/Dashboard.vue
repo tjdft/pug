@@ -19,7 +19,10 @@ import Project from "@/models/Project";
 export default class Dashboard extends Vue {
   projects: Array<Project> = [];
 
-  mounted() {
+  async mounted() {
+    // this.projects = await Project
+    //   .where('preset', 1)
+    //   .get()
     this.projects = [
       new Project({ id: 1, name: "digitometro-api" }),
       new Project({ id: 2, name: "digitometro-web" })

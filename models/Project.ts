@@ -11,22 +11,33 @@ export default class Project extends Model {
     sentry: SentryProject
 
     constructor(...attributes) {
-        super(...attributes)        
-        Object.assign(this, ...attributes)    
+        super(...attributes)
+        Object.assign(this, ...attributes)
 
         this.sonar = new SonarProject()
         this.smax = new SmaxProject()
         this.sentry = new SentryProject()
     }
 
-    // public static all(): Array<Project>
-    // {
-      
-    // }
+    public resource() {
+        return 'projects'
+    }
+
+    sonarMetrics() {
+        return this.hasMany(SonarProject)
+    }
+
+    sentryMetrics() {
+        return this.hasMany(SentryProject)
+    }
+
+    smaxMetrics() {
+        return this.hasMany(SmaxProject)
+    }
 
     public fetchMetrics() {
-        this.sonar.fetchMetrics()
-        this.sentry.fetchMetrics()
-        this.smax.fetchMetrics()
+        this.sonar = this.sonarMetrics().get()
+        this.smax = this.smaxMetrics().get()
+        this.sentry = this.sentryMetrics().get()
     }
 }
