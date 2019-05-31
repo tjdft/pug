@@ -1,0 +1,30 @@
+{
+    "projects": [
+        {
+            "id": 1,
+            "name": "Digitômetro",
+            "config": {
+                "sonar": [
+                    "digitometro-api",
+                    "digitometro-web"
+                ],
+                "sentry": [
+                    "digitometro-api"
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "name": "CEMAN",
+            "config": {
+                "sonar": [
+                    "ceman-frontend",
+                    "br.jus.tjdft.sudes:ceman-service"
+                ],
+                "sentry": [
+                    "ceman-service"
+                ]
+            }
+        }
+    ]
+}

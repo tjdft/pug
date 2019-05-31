@@ -4685,6 +4685,11 @@ node-fetch@^2.3.0, node-fetch@^2.6.0:
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 
+node-json-config@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/node-json-config/-/node-json-config-0.0.5.tgz#21a6aa831ee557976343cc9da8d80a9e54a8d0e7"
+  integrity sha1-Iaaqgx7lV5djQ8ydqNgKnlSo0Oc=
+
 node-libs-browser@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/node-libs-browser/-/node-libs-browser-2.2.0.tgz#c72f60d9d46de08a940dedbb25f3ffa2f9bbaa77"

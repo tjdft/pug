@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import Project from "@/models/Project";
-import Config from "@/models/Config";
+import pug from '~/pug.json'
 
 @Component({
   components: {
@@ -21,21 +21,13 @@ export default class Dashboard extends Vue {
   projects: Array<Project> = [];
 
   async mounted() {
-    // this.projects = await Project
-    //   .where('preset', 1)
-    //   .get()
+    let project
 
-    let p1 = new Project({ id: 1, name: "digitômetro" });
-    p1.config.sonar.push("digitometro-web", "digitometro-api");
-    p1.config.sentry.push("digitometro-api");
-
-    // console.log(p1);
-
-    let p2 = new Project({ id: 2, name: "ceman" });
-    p2.config.sonar.push("ceman-frontend", "br.jus.tjdft.sudes:ceman-service");
-    p2.config.sentry.push("ceman-service");
-
-    this.projects = [p1, p2];
+    pug.projects.forEach(item => {
+      project = new Project(item)
+      project.config = item.config
+      this.projects.push(project)
+    });
   }
 }
 </script>

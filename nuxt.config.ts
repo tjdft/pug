@@ -2,7 +2,7 @@ import NuxtConfiguration from '@nuxt/config'
 require('dotenv').config()
 
 const config: NuxtConfiguration = {
-  mode: 'spa',
+  mode: 'universal',
   head: {
     title: "pug",
     meta: [
@@ -80,6 +80,13 @@ const config: NuxtConfiguration = {
       }
     }
   },
+  build: {
+    // extend(config, ctx) {
+    //   config.node = {
+    //     fs: "empty"
+    //   }
+    // }
+  }
 }
 
 export default config
