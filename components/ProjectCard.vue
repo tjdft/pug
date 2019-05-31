@@ -1,5 +1,5 @@
 <template>
-  <v-card flat color="transparent" class="pt-3 px-2">
+  <v-card flat color="transparent" class="pb-1 px-2">
     <v-card-title class="pl-0">
       <h2>
         <strong>{{ project.name }}</strong>

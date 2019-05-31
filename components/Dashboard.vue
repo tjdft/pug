@@ -4,6 +4,7 @@
       <v-flex md6 xs12 v-for="project in projects" :key="project.id">
         <project-card :project="project" />
       </v-flex>
+      <!-- TODO mover rodapé pra cá e usar alinhamento do grid bottom (align-end ?) -->
     </v-layout>
   </v-container>
 </template>
@@ -23,6 +24,7 @@ export default class Dashboard extends Vue {
   async mounted() {
     let project
 
+    // TODO ordernar por nome
     pug.projects.forEach(item => {
       project = new Project(item)
       project.config = item.config
