@@ -1,7 +1,7 @@
 <template>
   <div class="project-item" :class="color">
-    <v-icon>donut_large</v-icon>
-    {{ coverage ? coverage + "%" : "" }}
+    <v-icon>favorite</v-icon>
+    {{ coverage !== null ? coverage + "%" : "" }}
   </div>
 </template>
 <script lang="ts">

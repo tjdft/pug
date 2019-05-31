@@ -14,6 +14,11 @@ export default class Sonar extends Model {
     }
 
     fetch() {
+        if (!this.project.config.sonar)
+        {
+            return
+        }
+
         const projectKeys = this.project.config.sonar.concat(',')
         const metricKeys = 'code_smells,coverage,vulnerabilities,bugs'
 

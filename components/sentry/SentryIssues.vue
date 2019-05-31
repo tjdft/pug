@@ -1,6 +1,6 @@
 <template>
   <div class="project-item" :class="color">
-    <v-icon>warning</v-icon> {{ issues }}
+    <v-icon>warning</v-icon> {{ issues !== null ? issues : "" }}
   </div>
 </template>
 <script lang="ts">

@@ -1,21 +1,23 @@
 <template>
   <v-card flat color="transparent" class="pt-3 px-2">
     <v-card-title class="pl-0">
-      <h2>{{ project.name }}</h2>
+      <h2>
+        <strong>{{ project.name }}</strong>
+      </h2>
     </v-card-title>
     <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap>
         <v-flex xs3 class="pa-0">
-          <smax-bugs :bugs="project.metrics.smax.bugs"/>
+          <smax-bugs :bugs="project.metrics.smax.bugs" />
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sentry-issues :issues="project.metrics.sentry.issues"/>
+          <sentry-issues :issues="project.metrics.sentry.issues" />
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-issues :issues="project.metrics.sonar.issues"/>
+          <sonar-issues :issues="project.metrics.sonar.issues" />
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-coverage :coverage="project.metrics.sonar.coverage"/>
+          <sonar-coverage :coverage="project.metrics.sonar.coverage" />
         </v-flex>
       </v-layout>
     </v-card-text>

@@ -2,14 +2,11 @@
     "projects": [
         {
             "id": 1,
-            "name": "Digitômetro",
+            "name": "SISARQ",
             "config": {
                 "sonar": [
-                    "digitometro-api",
-                    "digitometro-web"
-                ],
-                "sentry": [
-                    "digitometro-api"
+                    "br.jus.tjdft.sudes:arquivo",
+                    "sisarq-frontend"
                 ]
             }
         },
@@ -17,12 +14,39 @@
             "id": 2,
             "name": "CEMAN",
             "config": {
-                "sonar": [
-                    "ceman-frontend",
-                    "br.jus.tjdft.sudes:ceman-service"
-                ],
                 "sentry": [
                     "ceman-service"
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "name": "CONCILIAÇÃO",
+            "config": {
+                "sonar": [
+                    "br.jus.tjdft.sudes:conciliacao-service",
+                    "conciliacao-frontend"
+                ],
+                "sentry": [
+                    "conciliacao-service"
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "name": "BNMP2",
+            "config": {
+                "sonar": [
+                    "br.jus.tjdft.bnmp2:bnmp2"
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "name": "E-SOCIAL",
+            "config": {
+                "sonar": [
+                    "br.jus.tjdft.sudes:dwesocial"
                 ]
             }
         }

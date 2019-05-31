@@ -1,7 +1,7 @@
 <template>
   <div class="project-item" :class="color">
     <v-icon>track_changes</v-icon>
-    {{ issues }}
+    {{ issues !== null ? issues : "" }}
   </div>
 </template>
 <script lang="ts">

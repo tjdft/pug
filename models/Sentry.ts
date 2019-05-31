@@ -11,6 +11,11 @@ export default class Sentry extends Model {
         this.project = project;
     }
     fetch() {
+        console.log(this.project)
+        if (!this.project.config.sentry) {
+            return 
+        }
+
         this.project.config.sentry.forEach(projectID => {
             this.$axios.get(`/sentry/api/0/projects/sentry/${projectID}/issues/?query=is:unresolved&limit=1`).then(result => {
                 const total = parseInt(result.headers['x-hits'])
