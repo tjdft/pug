@@ -17,7 +17,7 @@ export default class Sonar extends Model {
         const projectKeys = this.project.config.sonar.concat(',')
         const metricKeys = 'code_smells,coverage,vulnerabilities,bugs'
 
-        this.$http.$get(`sonar/measures/search?projectKeys=${projectKeys}&metricKeys=${metricKeys}`).then(result => {
+        this.$axios.$get(`sonar/measures/search?projectKeys=${projectKeys}&metricKeys=${metricKeys}`).then(result => {
 
             const code_smells = this.sumByMetric(result.measures, 'code_smells')
             const coverage = this.sumByMetric(result.measures, 'coverage')
@@ -25,7 +25,7 @@ export default class Sonar extends Model {
             const bugs = this.sumByMetric(result.measures, 'bugs')
             const totalConfigs = this.project.config.sonar.length || 1
 
-            this.coverage = coverage / totalConfigs
+            this.coverage = Math.floor(coverage / totalConfigs)
             this.issues = code_smells + bugs + vulnerabilities
         }).catch(e => {
             throw new Error(`Failed on fetching Sonar metrics (${e.message})`)

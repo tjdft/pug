@@ -9,14 +9,15 @@ export default class Project extends Model {
     metrics: Metrics
 
     constructor(...attributes: any[]) {
-        super(...attributes)
+        super()
         Object.assign(this, ...attributes)
 
         this.metrics = new Metrics(this)
         this.config = new Config()
     }
 
-    public resource() {
-        return 'projects'
+    static all()
+    {
+        
     }
 }

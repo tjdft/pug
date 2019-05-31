@@ -26,7 +26,7 @@ const config: NuxtConfiguration = {
     '@/assets/style/app.scss'
   ],
   plugins: [
-    '@/plugins/vue-api-query'
+    '@/plugins/model-axios'
   ],
   modules: [
     '@nuxtjs/axios',
