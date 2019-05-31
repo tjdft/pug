@@ -12,7 +12,7 @@ export default class SonarCoverage extends Vue {
   @Prop({ type: Number, required: false }) coverage;
 
   get color() {
-    if (this.coverage === null || this.coverage === undefined) {
+    if (this.coverage === null) {
       return "grey";
     }
 

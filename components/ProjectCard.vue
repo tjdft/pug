@@ -36,10 +36,16 @@ import Project from "@/models/Project";
   }
 })
 export default class ProjectCard extends Vue {
-  @Prop({ type: Project, required: true }) project;
+  @Prop({ type: Project, required: true }) project!: Project;
 
   mounted() {
+    let refreshInterval: any = process.env["REFRESH_INTERVAL"] || 20000
+
     this.project.metrics.fetch();
+
+    setInterval(() => {
+      this.project.metrics.fetch();
+    }, refreshInterval)
   }
 }
 </script>

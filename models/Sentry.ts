@@ -11,9 +11,8 @@ export default class Sentry extends Model {
         this.project = project;
     }
     fetch() {
-        console.log(this.project)
         if (!this.project.config.sentry) {
-            return 
+            return
         }
 
         this.project.config.sentry.forEach(projectID => {

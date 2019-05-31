@@ -12,12 +12,20 @@ export default class Metrics extends Model {
 
     constructor(project: Project) {
         super()
+        this.project = project
         this.sonar = new Sonar(project)
         this.smax = new Smax(project)
         this.sentry = new Sentry(project)
     }
 
+    private reset() {
+        this.sonar = new Sonar(this.project)
+        this.smax = new Smax(this.project)
+        this.sentry = new Sentry(this.project)
+    }
+
     public fetch() {
+        this.reset()
         this.sonar.fetch()
         this.sentry.fetch()
         this.smax.fetch()

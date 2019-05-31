@@ -11,7 +11,7 @@ export default class SentryIssues extends Vue {
   @Prop({ type: Number, required: false }) issues
 
   get color() {
-    if (this.issues === null || this.issues === undefined) {
+    if (this.issues === null) {
       return 'grey'
     }
 

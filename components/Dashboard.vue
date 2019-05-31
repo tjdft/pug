@@ -11,6 +11,8 @@
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
 import Project from "@/models/Project";
+
+import _ from 'lodash'
 import pug from '~/pug.json'
 
 @Component({
@@ -22,14 +24,15 @@ export default class Dashboard extends Vue {
   projects: Array<Project> = [];
 
   async mounted() {
-    let project
-
-    // TODO ordernar por nome
-    pug.projects.forEach(item => {
-      project = new Project(item)
+    _(pug.projects).forEach((item) => {
+      let project = new Project(item)
       project.config = item.config
       this.projects.push(project)
-    });
+    })
+
+    this.projects = _(this.projects)
+      .sortBy('name')
+      .value()
   }
 }
 </script>
