@@ -53,6 +53,16 @@
                     "br.jus.tjdft.sudes:dwesocial"
                 ]
             }
+        },
+        {
+            "id": 6,
+            "name": "PESQUISA DJE",
+            "config": {
+                "sentry": [
+                    "indexador-dje",
+                    "pesquisadje-service"
+                ]
+            }
         }
     ]
 }
