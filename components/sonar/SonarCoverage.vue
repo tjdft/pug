@@ -16,7 +16,7 @@ export default class SonarCoverage extends Vue {
       return "grey";
     }
 
-    return "grey darken-3";
+    return "secondary";
   }
 }
 </script>
