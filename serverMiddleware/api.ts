@@ -22,19 +22,25 @@ app.get('/sonar*', async (req, res) => {
 })
 
 app.get('/smax*', async (req, res) => {    
-    let response = await axios.post(`${process.env.SMAX_URL}/auth/authentication-endpoint/authenticate/login?TENANTID=${process.env.SMAX_TENANTID}`, {
-        'Login': process.env.SMAX_USER,
-        'Password': process.env.SMAX_PASSWORD
-    })
-  
-    const token = (response.data && response.data.length === 1580) ? response.data : ''
-    const url = process.env.SMAX_URL + req.url.replace('/smax', "")
+    try{
 
-    response = await axios.get(url, {
-        headers: { 'Cookie': `LWSSO_COOKIE_KEY=${token}`}
-    })            
+        let response = await axios.post(`${process.env.SMAX_URL}/auth/authentication-endpoint/authenticate/login?TENANTID=${process.env.SMAX_TENANTID}`, {
+            'Login': process.env.SMAX_USER,
+            'Password': process.env.SMAX_PASSWORD
+        })
+      
+        const token = (response.data && response.data.length === 1516) ? response.data : ''
+        const url = process.env.SMAX_URL + req.url.replace('/smax', "")
+    
+        response = await axios.get(url, {
+            headers: { 'Cookie': `LWSSO_COOKIE_KEY=${token}`}
+        })                    
 
-    res.json(response.data)
+        res.json(response.data)
+
+    }catch(e){
+        throw new Error(`Error SMAX API: ${e.message}`)
+    }    
 })
 
 export default {

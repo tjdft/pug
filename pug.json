@@ -98,18 +98,6 @@
                     ]
                 }
             }
-        },
-        {
-            "id": 7,
-            "name": "DIGITÔMETRO",
-            "config": {
-                "sonar": [
-                    "digitometro-api"
-                ],
-                "sentry": [
-                    "digitometro-api"
-                ]
-            }
         }
     ]
 }

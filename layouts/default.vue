@@ -12,14 +12,14 @@
       <span class="title pr-3">
         <v-icon class="grey--text" medium>bug_report</v-icon> Smax issues
       </span>
-      <span class="pr-3">
+      <span class="title pr-3">
         <v-icon class="grey--text" left medium>warning</v-icon>Sentry issues
       </span>
-      <span class="pr-3">
+      <span class="title pr-3">
         <v-icon class="grey--text" left medium>track_changes</v-icon>Sonar
         issues
       </span>
-      <span class="pr-3">
+      <span class="title pr-3">
         <v-icon class="grey--text" left medium>favorite</v-icon>Test coverage
       </span>
       <v-spacer />
