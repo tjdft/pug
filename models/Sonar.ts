@@ -14,15 +14,14 @@ export default class Sonar extends Model {
     }
 
     fetch() {
-        if (!this.project.config.sonar)
-        {
+        if (!this.project.config.sonar) {
             return
         }
 
-        const projectKeys = this.project.config.sonar.concat(',')
+        const projectKeys = this.project.config.sonar.join(',')
         const metricKeys = 'code_smells,coverage,vulnerabilities,bugs'
 
-        this.$axios.$get(`sonar/measures/search?projectKeys=${projectKeys}&metricKeys=${metricKeys}`).then(result => {
+        this.$axios.$get(`/api/sonar/measures/search?projectKeys=${projectKeys}&metricKeys=${metricKeys}`).then(result => {
 
             const code_smells = this.sumByMetric(result.measures, 'code_smells')
             const coverage = this.sumByMetric(result.measures, 'coverage')

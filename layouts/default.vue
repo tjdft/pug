@@ -10,7 +10,7 @@
     </v-content>
     <v-footer color="transparent" fixed class=" pb-3 pl-4 grey--text">
       <span class="title pr-3">
-        <v-icon class="grey--text" medium>bug_report</v-icon> Smax bugs
+        <v-icon class="grey--text" medium>bug_report</v-icon> Smax issues
       </span>
       <span class="title pr-3">
         <v-icon class="grey--text" medium>warning</v-icon> Sentry issues
@@ -23,7 +23,7 @@
       </span>
       <v-spacer />
       <v-btn
-        flat
+        text
         icon
         large
         @click="$router.push('settings')"

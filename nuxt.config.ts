@@ -35,58 +35,97 @@ const config: NuxtConfiguration = {
   devModules: [
     '@nuxtjs/vuetify'
   ],
+  serverMiddleware: [
+    '~/serverMiddleware/api'
+  ],
   /**
    * Axios module configuration
    */
   axios: {
     credentials: true,
     proxy: true
-  },
-  proxy: {
-    '/sonar/': {
-      target: `${process.env.SONAR_URL}/api`,
-      pathRewrite: { '^/sonar': '' },
-      secure: false,
-      onProxyReq: proxyReq => {
-        // Sonar basic auth token need to be converted to base64
-        proxyReq.setHeader(
-          'Authorization',
-          `Basic ${Buffer.from(process.env.SONAR_TOKEN + ':', 'ascii').toString(
-            'base64'
-          )}`
-        )
-      }
-    },
-    '/openshift/': {
-      target: `${process.env.OPENSHIFT_URL}`,
-      pathRewrite: { '^/openshift': '' },
-      secure: false,
-      onProxyReq: proxyReq => {
-        proxyReq.setHeader(
-          'Authorization',
-          `Bearer ${process.env.OPENSHIFT_TOKEN}`
-        )
-      }
-    },
-    '/sentry/': {
-      target: `${process.env.SENTRY_URL}`,
-      pathRewrite: { '^/sentry': '' },
-      secure: false,
-      onProxyReq: proxyReq => {
-        proxyReq.setHeader(
-          'Authorization',
-          `Bearer ${process.env.SENTRY_TOKEN}`
-        )
-      }
-    }
-  },
-  build: {
-    // extend(config, ctx) {
-    //   config.node = {
-    //     fs: "empty"
-    //   }
-    // }
   }
+  // proxy: {
+  //   '/sonar/': {
+  //     target: `${process.env.SONAR_URL}/api`,
+  //     pathRewrite: { '^/sonar': '' },
+  //     secure: false,
+  //     onProxyReq: proxyReq => {
+  //       // Sonar basic auth token need to be converted to base64
+  //       proxyReq.setHeader(
+  //         'Authorization',
+  //         `Basic ${Buffer.from(process.env.SONAR_TOKEN + ':', 'ascii').toString(
+  //           'base64'
+  //         )}`
+  //       )
+  //     }
+  //   },
+  //   '/openshift/': {
+  //     target: `${process.env.OPENSHIFT_URL}`,
+  //     pathRewrite: { '^/openshift': '' },
+  //     secure: false,
+  //     onProxyReq: proxyReq => {
+  //       proxyReq.setHeader(
+  //         'Authorization',
+  //         `Bearer ${process.env.OPENSHIFT_TOKEN}`
+  //       )
+  //     }
+  //   },
+  //   '/sentry/': {
+  //     target: `${process.env.SENTRY_URL}`,
+  //     pathRewrite: { '^/sentry': '' },
+  //     secure: false,
+  //     onProxyReq: proxyReq => {
+  //       proxyReq.setHeader(
+  //         'Authorization',
+  //         `Bearer ${process.env.SENTRY_TOKEN}`
+  //       )
+  //     }
+  //   },
+  //   '/smax/': {
+  //     target: `${process.env.SMAX_URL}`,
+  //     pathRewrite: { '^/smax': '' },
+  //     secure: false,
+
+  //     onProxyReq: (proxyReq, req) => {
+
+  //       console.log(proxyReq)
+
+  //       // let token
+
+  //       // this.$axios.post(`${process.env.SMAX_URL}/auth/authentication-endpoint/authenticate/login?TENANTID=${process.env.SMAX_TENANTID}`, {
+  //       //   'Login': process.env.SMAX_USER,
+  //       //   'Password': process.env.SMAX_PASSWORD
+  //       // }).then(response => {
+  //       //     // TODO: We got a token            
+  //       //     if (response.data && response.data.length === 1580) {
+  //       //         token = response.data
+  //       //     }
+  //       // })
+
+  //       // proxyReq.setHeader('Cookie', `LWSSO_COOKIE_KEY=${token}`)
+
+
+  //       // req.setHeader('Cookie', 'LWSSO_COOKIE_KEY=444')
+  //       //   let bodyData = JSON.stringify({
+  //       //     'Login': process.env.SMAX_USER,
+  //       //     'Password': process.env.SMAX_PASSWORD
+  //       //   });
+  //       //   console.log(proxyReq.config)
+  //       //   proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+  //       //   proxyReq.write(bodyData)
+  //       //   console.log(proxyReq.config)
+  //       //   req.params = {
+  //       //     'Login': process.env.SMAX_USER,
+  //       //     'Password': process.env.SMAX_PASSWORD
+  //       //   };
+  //       //   proxyReq.setHeader(
+  //       //     'Authorization',
+  //       //     `Bearer ${process.env.SENTRY_TOKEN}`
+  //       //   )
+  //     }
+  // }
+  // }
 }
 
 export default config

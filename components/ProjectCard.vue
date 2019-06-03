@@ -8,7 +8,7 @@
     <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap>
         <v-flex xs3 class="pa-0">
-          <smax-bugs :bugs="project.metrics.smax.bugs" />
+          <smax-issues :issues="project.metrics.smax.issues" />
         </v-flex>
         <v-flex xs3 class="pa-0">
           <sentry-issues :issues="project.metrics.sentry.issues" />
@@ -32,7 +32,7 @@ import Project from "@/models/Project";
     SonarIssues: () => import("@/components/sonar/SonarIssues.vue"),
     SonarCoverage: () => import("@/components/sonar/SonarCoverage.vue"),
     SentryIssues: () => import("@/components/sentry/SentryIssues.vue"),
-    SmaxBugs: () => import("@/components/smax/SmaxBugs.vue")
+    SmaxIssues: () => import("@/components/smax/SmaxIssues.vue")
   }
 })
 export default class ProjectCard extends Vue {
