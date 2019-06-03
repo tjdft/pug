@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import Model from '@/models/Model'
-import Project from '@/models/Project';
+import Model from '~/models/Model'
+import Project from '~/models/Project';
 
 export default class Sonar extends Model {
     name: string = ''

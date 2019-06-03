@@ -2,7 +2,7 @@
   <v-card flat color="transparent" class="pb-1 px-2">
     <v-card-title class="pl-0">
       <h2>
-        <strong>{{ project.name }}</strong>
+        <strong> {{ project.name }}</strong>
       </h2>
     </v-card-title>
     <v-card-text class="text-xs-center pt-3 mt-3">
@@ -25,14 +25,14 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator";
-import Project from "@/models/Project";
+import Project from "~/models/Project";
 
 @Component({
   components: {
-    SonarIssues: () => import("@/components/sonar/SonarIssues.vue"),
-    SonarCoverage: () => import("@/components/sonar/SonarCoverage.vue"),
-    SentryIssues: () => import("@/components/sentry/SentryIssues.vue"),
-    SmaxIssues: () => import("@/components/smax/SmaxIssues.vue")
+    SonarIssues: () => import("~/components/sonar/SonarIssues.vue"),
+    SonarCoverage: () => import("~/components/sonar/SonarCoverage.vue"),
+    SentryIssues: () => import("~/components/sentry/SentryIssues.vue"),
+    SmaxIssues: () => import("~/components/smax/SmaxIssues.vue")
   }
 })
 export default class ProjectCard extends Vue {

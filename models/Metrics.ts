@@ -1,8 +1,8 @@
 import Sonar from "~/models/Sonar";
 import Smax from "~/models/Smax";
 import Sentry from "~/models/Sentry";
-import Project from "@/models/Project";
-import Model from "@/models/Model";
+import Project from "~/models/Project";
+import Model from "~/models/Model";
 
 export default class Metrics extends Model {
     project!: Project

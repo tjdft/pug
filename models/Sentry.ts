@@ -1,5 +1,5 @@
-import Model from '@/models/Model'
-import Project from '@/models/Project';
+import Model from '~/models/Model'
+import Project from '~/models/Project';
 
 export default class Sentry extends Model {
     name: string = ''

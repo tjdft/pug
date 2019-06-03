@@ -23,10 +23,10 @@ const config: NuxtConfiguration = {
     API_URL: "http://localhost:8080"
   },
   css: [
-    '@/assets/style/app.scss'
+    '~/assets/style/app.scss'
   ],
   plugins: [
-    '@/plugins/model-axios'
+    '~/plugins/model-axios'
   ],
   modules: [
     '@nuxtjs/axios',

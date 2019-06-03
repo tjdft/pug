@@ -1,6 +1,6 @@
-import Model from '@/models/Model'
-import Metrics from '@/models/Metrics';
-import Config from '@/models/Config';
+import Model from '~/models/Model'
+import Metrics from '~/models/Metrics';
+import Config from '~/models/Config';
 
 export default class Project extends Model {
     id: number | null = null
@@ -16,8 +16,7 @@ export default class Project extends Model {
         this.config = new Config()
     }
 
-    static all()
-    {
-        
+    static all() {
+
     }
 }

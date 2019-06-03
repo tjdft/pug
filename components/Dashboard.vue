@@ -18,14 +18,14 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator";
-import Project from "@/models/Project";
+import Project from "~/models/Project";
 
 import _ from 'lodash'
 import pug from '~/pug.json'
 
 @Component({
   components: {
-    ProjectCard: () => import("@/components/ProjectCard.vue")
+    ProjectCard: () => import("~/components/ProjectCard.vue")
   }
 })
 export default class Dashboard extends Vue {
