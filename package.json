@@ -19,6 +19,7 @@
     "@nuxtjs/vuetify": "^1.0.0-alpha.6",
     "axios": "^0.19.0",
     "express": "^4.17.1",
+    "express-session": "^1.16.1",
     "lodash": "^4.17.11",
     "node-json-config": "^0.0.5",
     "nuxt": "^2.8.0",

@@ -2,22 +2,22 @@
   <v-card flat color="transparent" class="pb-1 px-2">
     <v-card-title class="pl-0">
       <h2>
-        <strong> {{ project.name }}</strong>
+        <strong>{{ project.name }}</strong>
       </h2>
     </v-card-title>
     <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap>
         <v-flex xs3 class="pa-0">
-          <smax-issues :issues="project.metrics.smax.issues" />
+          <smax-issues :issues="project.metrics.smax.issues"/>
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sentry-issues :issues="project.metrics.sentry.issues" />
+          <sentry-issues :issues="project.metrics.sentry.issues"/>
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-issues :issues="project.metrics.sonar.issues" />
+          <sonar-issues :issues="project.metrics.sonar.issues"/>
         </v-flex>
         <v-flex xs3 class="pa-0">
-          <sonar-coverage :coverage="project.metrics.sonar.coverage" />
+          <sonar-coverage :coverage="project.metrics.sonar.coverage"/>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -39,13 +39,13 @@ export default class ProjectCard extends Vue {
   @Prop({ type: Project, required: true }) project!: Project;
 
   mounted() {
-    let refreshInterval: any = process.env["REFRESH_INTERVAL"] || 20000
+    let refreshInterval: any = process.env["REFRESH_INTERVAL"] || 20000;
 
     this.project.metrics.fetch();
 
     setInterval(() => {
       this.project.metrics.fetch();
-    }, refreshInterval)
+    }, refreshInterval);
   }
 }
 </script>
