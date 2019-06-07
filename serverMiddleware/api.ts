@@ -51,26 +51,36 @@ app.get('/smax*', async (req, res) => {
 
 app.get('/workspaces', async (req, res) => {
     try {
-
-        const projects = PugConfig.get('projects')
-        res.json(projects)
+        const workspaces = PugConfig.get('workspaces')
+        res.json(workspaces)
     } catch (e) {
-        throw new Error(`Error fetching projects: ${e.message}`)
+        throw new Error(`Error fetching workspaces: ${e.message}`)
     }
 });
 
-app.post('/workspaces', async (req, res) => {
+app.get('/workspaces/:id', async (req, res) => {
     try {
-        PugConfig.put('projects', req.body.projects)
-        PugConfig.save()
+        const workspaces = PugConfig.get('workspaces')
+        const workspace = workspaces.find(workspace => workspace.name === req.params.id)
 
-        const projects = PugConfig.get('projects')
-
-        res.json(projects)
+        res.json(workspace)
     } catch (e) {
-        throw new Error(`Error saving projects: ${e.message}`)
+        throw new Error(`Error fetching workspaces: ${e.message}`)
     }
 });
+
+// app.post('/workspaces', async (req, res) => {
+//     try {
+//         PugConfig.put('projects', req.body.projects)
+//         PugConfig.save()
+
+//         const projects = PugConfig.get('projects')
+
+//         res.json(projects)
+//     } catch (e) {
+//         throw new Error(`Error saving projects: ${e.message}`)
+//     }
+// });
 
 export default {
     path: '/api',

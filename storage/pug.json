@@ -1,98 +1,107 @@
 {
-    "projects": [
+    "workspaces": [
         {
-            "id": 1,
-            "name": "SISARQ",
-            "config": {
-                "sonar": [
-                    "br.jus.tjdft.sudes:arquivo",
-                    "sisarq-frontend"
-                ],
-                "smax": {
-                    "service": 35063,
-                    "groups": [
-                        73185
-                    ]
+            "name": "PROJETOS ALFA",
+            "projects": [
+                {
+                    "id": 1,
+                    "name": "SISARQ",
+                    "config": {
+                        "sonar": [
+                            "br.jus.tjdft.sudes:arquivo",
+                            "sisarq-frontend"
+                        ],
+                        "smax": {
+                            "service": 35063,
+                            "groups": [
+                                73185
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "CEMAN",
+                    "config": {
+                        "sonar": [
+                            "ceman-frontend",
+                            "br.jus.tjdft.sudes:ceman-service"
+                        ],
+                        "sentry": [
+                            "ceman-service"
+                        ],
+                        "smax": {
+                            "service": 33212,
+                            "groups": [
+                                73185
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "CONCILIAÇÃO",
+                    "config": {
+                        "sonar": [
+                            "br.jus.tjdft.sudes:conciliacao-service",
+                            "conciliacao-frontend"
+                        ],
+                        "sentry": [
+                            "conciliacao-service"
+                        ],
+                        "smax": {
+                            "service": 75231,
+                            "groups": [
+                                73185
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "BNMP2",
+                    "config": {
+                        "sonar": [
+                            "br.jus.tjdft.bnmp2:bnmp2"
+                        ],
+                        "smax": {
+                            "service": 58869,
+                            "groups": [
+                                73185
+                            ]
+                        }
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "E-SOCIAL",
+                    "config": {
+                        "sonar": [
+                            "br.jus.tjdft.sudes:dwesocial"
+                        ]
+                    }
+                },
+                {
+                    "id": 6,
+                    "name": "PESQUISA DJE",
+                    "config": {
+                        "sentry": [
+                            "indexador-dje",
+                            "pesquisadje-service"
+                        ],
+                        "smax": {
+                            "service": 35067,
+                            "groups": [
+                                73185
+                            ]
+                        }
+                    }
                 }
-            }
+            ]
         },
         {
-            "id": 2,
-            "name": "CEMAN",
-            "config": {
-                "sonar": [
-                    "ceman-frontend",
-                    "br.jus.tjdft.sudes:ceman-service"
-                ],
-                "sentry": [
-                    "ceman-service"
-                ],
-                "smax": {
-                    "service": 33212,
-                    "groups": [
-                        73185
-                    ]
-                }
-            }
-        },
-        {
-            "id": 3,
-            "name": "CONCILIAÇÃO",
-            "config": {
-                "sonar": [
-                    "br.jus.tjdft.sudes:conciliacao-service",
-                    "conciliacao-frontend"
-                ],
-                "sentry": [
-                    "conciliacao-service"
-                ],
-                "smax": {
-                    "service": 75231,
-                    "groups": [
-                        73185
-                    ]
-                }
-            }
-        },
-        {
-            "id": 4,
-            "name": "BNMP2",
-            "config": {
-                "sonar": [
-                    "br.jus.tjdft.bnmp2:bnmp2"
-                ],
-                "smax": {
-                    "service": 58869,
-                    "groups": [
-                        73185
-                    ]
-                }
-            }
-        },
-        {
-            "id": 5,
-            "name": "E-SOCIAL",
-            "config": {
-                "sonar": [
-                    "br.jus.tjdft.sudes:dwesocial"
-                ]
-            }
-        },
-        {
-            "id": 6,
-            "name": "PESQUISA DJE",
-            "config": {
-                "sentry": [
-                    "indexador-dje",
-                    "pesquisadje-service"
-                ],
-                "smax": {
-                    "service": 35067,
-                    "groups": [
-                        73185
-                    ]
-                }
-            }
+            "name": "PROJETOS BETA",
+            "projects": []
         }
     ]
 }
