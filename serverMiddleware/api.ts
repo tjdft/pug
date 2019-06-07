@@ -3,7 +3,7 @@ let axios = require('axios')
 let app = express()
 
 let NodeJsonConfig = require('node-json-config')
-let PugConfig = new NodeJsonConfig('./pug.json')
+let PugConfig = new NodeJsonConfig('./storage/pug.json')
 
 app.use(express.json())
 
@@ -34,7 +34,8 @@ app.get('/smax*', async (req, res) => {
             'Password': process.env.SMAX_PASSWORD
         })
 
-        const token = (response.data && response.data.length === 1516) ? response.data : ''
+        // TODO
+        const token = (response.data && response.data.length === 1580 /** PROD 1516 */) ? response.data : ''
         const url = process.env.SMAX_URL + req.url.replace('/smax', "")
 
         response = await axios.get(url, {
@@ -48,7 +49,7 @@ app.get('/smax*', async (req, res) => {
     }
 })
 
-app.get('/projects', async (req, res) => {
+app.get('/workspaces', async (req, res) => {
     try {
 
         const projects = PugConfig.get('projects')
@@ -58,7 +59,7 @@ app.get('/projects', async (req, res) => {
     }
 });
 
-app.post('/projects', async (req, res) => {
+app.post('/workspaces', async (req, res) => {
     try {
         PugConfig.put('projects', req.body.projects)
         PugConfig.save()
