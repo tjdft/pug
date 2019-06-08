@@ -19,8 +19,8 @@
           BACKLOG
         </strong>
       </v-btn>
-      <smax-issues :issues="dashboard.totalIssues()" class="px-3" />
-      <smax-features :features="dashboard.totalFeatures()" class="px-3" />
+      <smax-issues :issues="dashboard.totalIssues" class="px-3" />
+      <smax-features :features="dashboard.totalFeatures" class="px-3" />
     </v-toolbar-items>
   </v-toolbar>
 </template>
