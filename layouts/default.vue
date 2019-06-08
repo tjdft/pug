@@ -13,6 +13,9 @@
         <v-icon class="grey--text" medium>bug_report</v-icon> Smax issues
       </span>
       <span class="title pr-3">
+        <v-icon class="grey--text" medium>toys</v-icon> Smax features
+      </span>
+      <span class="title pr-3">
         <v-icon class="grey--text" left medium>warning</v-icon>Sentry issues
       </span>
       <span class="title pr-3">
@@ -23,14 +26,8 @@
         <v-icon class="grey--text" left medium>favorite</v-icon>Test coverage
       </span>
       <v-spacer />
-      <v-btn
-        text
-        icon
-        large
-        @click="$router.push('settings')"
-        class="grey--text"
-      >
-        <v-icon class="grey--text">settings</v-icon>
+      <v-btn text icon large @click="$router.push('/')" class="grey--text">
+        <v-icon class="grey--text">home</v-icon>
       </v-btn>
     </v-footer>
   </v-app>

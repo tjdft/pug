@@ -1,7 +1,7 @@
 {
-    "workspaces": [
+    "dashboards": [
         {
-            "name": "PROJETOS ALFA",
+            "name": "SERPROJ",
             "projects": [
                 {
                     "id": 1,
@@ -15,6 +15,14 @@
                             "service": 35063,
                             "groups": [
                                 73185
+                            ],
+                            "issues": [
+                                34629
+                            ],
+                            "features": [
+                                34628,
+                                75195,
+                                59087
                             ]
                         }
                     }
@@ -34,6 +42,14 @@
                             "service": 33212,
                             "groups": [
                                 73185
+                            ],
+                            "issues": [
+                                34629
+                            ],
+                            "features": [
+                                34628,
+                                75195,
+                                59087
                             ]
                         }
                     }
@@ -53,6 +69,14 @@
                             "service": 75231,
                             "groups": [
                                 73185
+                            ],
+                            "issues": [
+                                34629
+                            ],
+                            "features": [
+                                34628,
+                                75195,
+                                59087
                             ]
                         }
                     }
@@ -68,6 +92,14 @@
                             "service": 58869,
                             "groups": [
                                 73185
+                            ],
+                            "issues": [
+                                34629
+                            ],
+                            "features": [
+                                34628,
+                                75195,
+                                59087
                             ]
                         }
                     }
@@ -93,15 +125,19 @@
                             "service": 35067,
                             "groups": [
                                 73185
+                            ],
+                            "issues": [
+                                34629
+                            ],
+                            "features": [
+                                34628,
+                                75195,
+                                59087
                             ]
                         }
                     }
                 }
             ]
-        },
-        {
-            "name": "PROJETOS BETA",
-            "projects": []
         }
     ]
 }

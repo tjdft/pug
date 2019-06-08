@@ -49,23 +49,23 @@ app.get('/smax*', async (req, res) => {
     }
 })
 
-app.get('/workspaces', async (req, res) => {
+app.get('/dashboards', async (req, res) => {
     try {
-        const workspaces = PugConfig.get('workspaces')
-        res.json(workspaces)
+        const dashboards = PugConfig.get('dashboards')
+        res.json(dashboards)
     } catch (e) {
-        throw new Error(`Error fetching workspaces: ${e.message}`)
+        throw new Error(`Error fetching dashboards: ${e.message}`)
     }
 });
 
-app.get('/workspaces/:id', async (req, res) => {
+app.get('/dashboards/:id', async (req, res) => {
     try {
-        const workspaces = PugConfig.get('workspaces')
-        const workspace = workspaces.find(workspace => workspace.name === req.params.id)
+        const dashboards = PugConfig.get('dashboards')
+        const dashboard = dashboards.find(dashboard => dashboard.name === req.params.id)
 
-        res.json(workspace)
+        res.json(dashboard)
     } catch (e) {
-        throw new Error(`Error fetching workspaces: ${e.message}`)
+        throw new Error(`Error fetching dashboard: ${e.message}`)
     }
 });
 

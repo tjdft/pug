@@ -1,4 +1,4 @@
-$body-font-family: 'Muli' !important;
+// $body-font-family: 'Muli' !important;
 
 @import '~vuetify/src/styles/main.sass';
 
@@ -6,12 +6,19 @@ $body-font-family: 'Muli' !important;
     padding: 15px 5px;
     font-size: 20pt;
     font-weight: 800;
-    margin: 1px;
+    margin: 0.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .project-item .v-icon{
     font-size: 20pt;
     margin-bottom: 3px;
+}
+
+.project-metrics .flex{
+    width: 20%;
 }
 
 .theme--dark.v-card .v-card__text{

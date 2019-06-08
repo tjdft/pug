@@ -4,6 +4,7 @@ import Project from '~/models/Project';
 export default class Smax extends Model {
     name: string = ''
     issues: number | null = null
+    features: number | null = null
     project: Project
     static cookie: string = ''
 
@@ -19,10 +20,13 @@ export default class Smax extends Model {
 
         const groups = this.project.config.smax.groups.join(',')
         const service = this.project.config.smax.service
+        const issues = this.project.config.smax.issues
+        const features = this.project.config.smax.features
 
-        this.$axios.get(`/api/smax/rest/ems/Request?filter=(RegisteredForActualService = ${service} and Status != 'RequestStatusComplete' and Active = true and  (ExpertGroup in (${groups})))&layout=Id`)
+        this.$axios.get(`/api/smax/rest/ems/Request?filter=(RegisteredForActualService = ${service} and Status != 'RequestStatusComplete' and Active = true and  (ExpertGroup in (${groups})))&layout=Id,Category`)
             .then(response => {
-                this.issues = response.data.meta.total_count
+                this.issues = response.data.entities.filter(entity => issues.includes(parseInt(entity.properties.Category))).length
+                this.features = response.data.entities.filter(entity => !issues.includes(parseInt(entity.properties.Category))).length
             }).catch(e => {
                 throw new Error(`Failed on fetching Smax metrics (${e.message})`)
             })

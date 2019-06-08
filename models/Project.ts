@@ -15,8 +15,4 @@ export default class Project extends Model {
         this.metrics = new Metrics(this)
         this.config = new Config()
     }
-
-    static all() {
-
-    }
 }

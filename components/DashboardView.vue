@@ -1,11 +1,20 @@
 <template>
-  <v-container fluid grid-list-xl class="pt-0">
+  <v-container fluid grid-list-xl>
+    <dashboard-summary :dashboard="dashboard" />
     <v-layout row wrap>
-      <v-flex md6 xs12 v-for="project in workspace.projects" :key="project.id">
-        <project-card :project="project"/>
+      <v-flex md6 xs12 v-for="project in dashboard.projects" :key="project.id">
+        <project-card :project="project" />
       </v-flex>
-      <v-flex xs12 text-xs-center class="pt-5 mt-5" v-if="workspace.projects.length === 0">
-        <h1>No projects found ...</h1>
+      <v-flex
+        xs12
+        text-xs-center
+        class="pt-5 mt-5"
+        v-if="dashboard.projects.length === 0"
+      >
+        <h1>
+          No projects found for <br />
+          <strong>{{ dashboard.name }}</strong>
+        </h1>
       </v-flex>
       <!-- TODO mover rodapé pra cá e usar alinhamento do grid bottom (align-end ?) -->
     </v-layout>
@@ -14,21 +23,22 @@
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator";
 import Project from "~/models/Project";
-import Workspace from "~/models/Workspace";
+import Dashboard from "~/models/Dashboard";
 
 import _ from "lodash";
 
 @Component({
   components: {
-    ProjectCard: () => import("~/components/ProjectCard.vue")
+    DashboardSummary: () => import("~/components/DashboardSummary.vue"),
+    ProjectCard: () => import("~/components/project/ProjectCard.vue")
   }
 })
-export default class Dashboard extends Vue {
-  @Prop({ type: Workspace, required: true }) workspace?: Workspace;
+export default class DashboardView extends Vue {
+  @Prop({ type: Dashboard, required: true }) dashboard?: Dashboard;
 
   async mounted() {
     // try {
-    //   const response = await this.$axios.$get(`/api/workspaces`);
+    //   const response = await this.$axios.$get(`/api/dashboards`);
     //   let projects: Array<any> = [];
     //   _(response).forEach(item => {
     //     let project = new Project(item);
