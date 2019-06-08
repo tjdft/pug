@@ -41,15 +41,20 @@ import Project from "~/models/Project";
 })
 export default class ProjectCard extends Vue {
   @Prop({ type: Project, required: true }) project!: Project;
+  pooling: any
 
   mounted() {
     let refreshInterval: any = process.env["REFRESH_INTERVAL"] || 20000;
 
     this.project.metrics.fetch();
 
-    setInterval(() => {
+    this.pooling = setInterval(() => {
       this.project.metrics.fetch();
     }, refreshInterval);
+  }
+
+  beforeDestroy() {
+    clearInterval(this.pooling)
   }
 }
 </script>
