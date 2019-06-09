@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar app flat color="#353535" class=" pr-0">
+  <v-app-bar app flat color="#353535" class=" pr-0">
     <v-toolbar-title class="pr-5">
       <v-icon left color="info">bar_chart</v-icon>
       <small>
@@ -19,10 +19,13 @@
           BACKLOG
         </strong>
       </v-btn>
-      <smax-issues :issues="dashboard.totalIssues" class="px-3" />
-      <smax-features :features="dashboard.totalFeatures" class="px-3" />
+      <smax-issues :issues="dashboard.totalOf('smax', 'issues')" class="px-3" />
+      <smax-features
+        :features="dashboard.totalOf('smax', 'features')"
+        class="px-3"
+      />
     </v-toolbar-items>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator";

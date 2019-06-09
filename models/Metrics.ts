@@ -18,14 +18,7 @@ export default class Metrics extends Model {
         this.sentry = new Sentry(project)
     }
 
-    private reset() {
-        this.sonar = new Sonar(this.project)
-        this.smax = new Smax(this.project)
-        this.sentry = new Sentry(this.project)
-    }
-
     public fetch() {
-        this.reset()
         this.sonar.fetch()
         this.sentry.fetch()
         this.smax.fetch()

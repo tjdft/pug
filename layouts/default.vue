@@ -16,7 +16,7 @@
         <v-icon class="grey--text" medium>toys</v-icon> Smax features
       </span>
       <span class="title pr-3">
-        <v-icon class="grey--text" left medium>warning</v-icon>Sentry issues
+        <v-icon class="grey--text" left medium>error</v-icon>Sentry issues
       </span>
       <span class="title pr-3">
         <v-icon class="grey--text" left medium>track_changes</v-icon>Sonar
@@ -26,9 +26,8 @@
         <v-icon class="grey--text" left medium>favorite</v-icon>Test coverage
       </span>
       <v-spacer />
-      <v-btn text icon large @click="$router.push('/')" class="grey--text">
-        <v-icon class="grey--text">home</v-icon>
-      </v-btn>
+      <v-icon left small class="grey--text">explore</v-icon>
+      <small><strong>TJDFT</strong>&nbsp; LABS</small>
     </v-footer>
   </v-app>
 </template>

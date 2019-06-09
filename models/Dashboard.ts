@@ -11,21 +11,11 @@ export default class Dashboard extends Model {
         this.projects = projects
     }
 
-    public get totalIssues() {
+    public totalOf(type: string, metric: string) {
         let total: number | null = null
 
         this.projects.forEach(project => {
-            total = project.metrics.smax.issues === null ? total : (total || 0) + project.metrics.smax.issues
-        })
-
-        return total
-    }
-
-    public get totalFeatures() {
-        let total: number | null = null
-
-        this.projects.forEach(project => {
-            total = project.metrics.smax.features === null ? total : (total || 0) + project.metrics.smax.features
+            total = project.metrics[type][metric] === null ? total : (total || 0) + project.metrics[type][metric]
         })
 
         return total

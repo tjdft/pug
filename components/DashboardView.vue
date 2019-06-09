@@ -1,9 +1,10 @@
 <template>
   <v-container fluid grid-list-xl>
     <dashboard-summary :dashboard="dashboard" />
+    <notification-popup :notifications="notifications" />
     <v-layout row wrap>
       <v-flex md6 xs12 v-for="project in dashboard.projects" :key="project.id">
-        <project-card :project="project" />
+        <project-card :project="project" @newNotification="notify" />
       </v-flex>
       <v-flex
         xs12
@@ -22,35 +23,25 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from "nuxt-property-decorator";
-import Project from "~/models/Project";
-import Dashboard from "~/models/Dashboard";
 
 import _ from "lodash";
+import Project from "~/models/Project";
+import Dashboard from "~/models/Dashboard";
+import Notification from "~/models/Notification";
 
 @Component({
   components: {
     DashboardSummary: () => import("~/components/DashboardSummary.vue"),
-    ProjectCard: () => import("~/components/project/ProjectCard.vue")
+    ProjectCard: () => import("~/components/project/ProjectCard.vue"),
+    NotificationPopup: () => import("~/components/notification/NotificationPopup.vue")
   }
 })
 export default class DashboardView extends Vue {
-  @Prop({ type: Dashboard, required: true }) dashboard?: Dashboard;
+  @Prop() dashboard?: Dashboard;
+  notifications: Array<Notification> = [];
 
-  async mounted() {
-    // try {
-    //   const response = await this.$axios.$get(`/api/dashboards`);
-    //   let projects: Array<any> = [];
-    //   _(response).forEach(item => {
-    //     let project = new Project(item);
-    //     project.config = item.config;
-    //     projects.push(project);
-    //   });
-    //   this.projects = _(projects)
-    //     .sortBy("name")
-    //     .value();
-    // } catch (error) {
-    //   console.log(`Error on fetching projects: ${error.message}`);
-    // }
+  notify(notification: Notification) {
+    this.notifications.push(notification)
   }
 }
 </script>

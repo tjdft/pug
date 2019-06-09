@@ -27,8 +27,9 @@
   </v-card>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from "nuxt-property-decorator";
+import { Component, Vue, Prop, Watch } from "nuxt-property-decorator";
 import Project from "~/models/Project";
+import Notification from "~/models/Notification";
 
 @Component({
   components: {
@@ -40,7 +41,7 @@ import Project from "~/models/Project";
   }
 })
 export default class ProjectCard extends Vue {
-  @Prop({ type: Project, required: true }) project!: Project;
+  @Prop() project!: Project;
   pooling: any
 
   mounted() {
@@ -51,6 +52,26 @@ export default class ProjectCard extends Vue {
     this.pooling = setInterval(() => {
       this.project.metrics.fetch();
     }, refreshInterval);
+  }
+
+  @Watch('project.metrics.smax.issues', { deep: true })
+  watchIssues(newVal, oldVal) {
+    if (oldVal === null || newVal <= oldVal || newVal === 0) {
+      return
+    }
+
+    let notification = new Notification(`${this.project.name} has a new issue!`, 'issue')
+    this.$emit('newNotification', notification)
+  }
+
+  @Watch('project.metrics.smax.features', { deep: true })
+  watchFeatures(newVal, oldVal) {
+    if (oldVal === null || newVal <= oldVal || newVal === 0) {
+      return
+    }
+
+    let notification = new Notification(`${this.project.name} has a new feature request!`, 'feature')
+    this.$emit('newNotification', notification)
   }
 
   beforeDestroy() {

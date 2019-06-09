@@ -2,11 +2,9 @@ import Model from '~/models/Model'
 import Project from '~/models/Project';
 
 export default class Smax extends Model {
-    name: string = ''
     issues: number | null = null
     features: number | null = null
     project: Project
-    static cookie: string = ''
 
     constructor(project: Project) {
         super();

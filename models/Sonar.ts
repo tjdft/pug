@@ -3,7 +3,6 @@ import Model from '~/models/Model'
 import Project from '~/models/Project';
 
 export default class Sonar extends Model {
-    name: string = ''
     issues: number | null = null
     coverage: number | null = null
     project: Project

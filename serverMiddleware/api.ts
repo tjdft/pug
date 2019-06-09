@@ -79,7 +79,7 @@ app.get('/dashboards/:id', async (req, res) => {
 //         res.json(projects)
 //     } catch (e) {
 //         throw new Error(`Error saving projects: ${e.message}`)
-//     }
+//    }
 // });
 
 export default {
