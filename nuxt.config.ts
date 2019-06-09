@@ -12,11 +12,6 @@ const config: NuxtConfiguration = {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
-      // {
-      //   rel: 'stylesheet',
-      //   href:
-      //     'https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Material+Icons'
-      // }
     ]
   },
   css: [
@@ -32,7 +27,7 @@ const config: NuxtConfiguration = {
   ],
   devModules: [
     '@nuxtjs/vuetify'
-  ],  
+  ],
   serverMiddleware: [
     '~/serverMiddleware/api'
   ],
