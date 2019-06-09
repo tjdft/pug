@@ -8,7 +8,7 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer color="transparent" class=" pb-3 pl-4 grey--text">
+    <v-footer color="transparent" class="pa-4 grey--text">
       <span class="title pr-3">
         <v-icon class="grey--text" medium>bug_report</v-icon> Smax issues
       </span>
@@ -26,8 +26,10 @@
         <v-icon class="grey--text" left medium>favorite</v-icon>Test coverage
       </span>
       <v-spacer />
-      <v-icon left small class="grey--text">explore</v-icon>
-      <small><strong>TJDFT</strong>&nbsp; LABS</small>
+      <span>
+        <v-icon left small class="grey--text">explore</v-icon>
+        <small><strong>TJDFT</strong>&nbsp; LABS</small>
+      </span>
     </v-footer>
   </v-app>
 </template>
