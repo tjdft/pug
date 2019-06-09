@@ -8,7 +8,7 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer color="transparent" fixed class=" pb-3 pl-4 grey--text">
+    <v-footer color="transparent" class=" pb-3 pl-4 grey--text">
       <span class="title pr-3">
         <v-icon class="grey--text" medium>bug_report</v-icon> Smax issues
       </span>
