@@ -2,6 +2,10 @@
 
 @import '~vuetify/src/styles/main.sass';
 
+html{
+    overflow-y: hidden !important;
+}
+
 .project-item{
     padding: 15px 5px;
     font-size: 20pt;

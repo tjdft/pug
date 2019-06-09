@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog">
     <v-card v-if="notification" flat dark color="warning">
       <v-img height="300" :src="`/${notification.type}.gif`" />
-      <v-card-text class="text-xs-center display-4 font-weight-black pa-5">
+      <v-card-text class="text-xs-center display-3 font-weight-black pa-5">
         {{ notification.message }}
       </v-card-text>
     </v-card>
@@ -30,6 +30,9 @@ export default class NotificationPopup extends Vue {
   alert(notification: Notification) {
     this.dialog = true
     this.notification = notification
+
+    const audio = new Audio(`/${notification.type}.wav`);
+    audio.play();
 
     setTimeout(() => {
       this.dialog = false
