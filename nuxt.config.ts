@@ -11,15 +11,16 @@ const config: NuxtConfiguration = {
       { hid: "description", name: "description", content: "A cute puppy that displays dashboards on your TV" }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      {
-        rel: 'stylesheet',
-        href:
-          'https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Material+Icons'
-      }
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
+      // {
+      //   rel: 'stylesheet',
+      //   href:
+      //     'https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Material+Icons'
+      // }
     ]
   },
   css: [
+    'material-design-icons-iconfont/dist/material-design-icons.css',
     '~/assets/style/app.scss'
   ],
   plugins: [
@@ -31,10 +32,16 @@ const config: NuxtConfiguration = {
   ],
   devModules: [
     '@nuxtjs/vuetify'
-  ],
+  ],  
   serverMiddleware: [
     '~/serverMiddleware/api'
   ],
+  vuetify: {
+    defaultAssets: {
+      font: false,
+      icons: false
+    }
+  },
   /**
    * Axios module configuration
    */
