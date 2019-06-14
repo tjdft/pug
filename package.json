@@ -22,12 +22,13 @@
     "lodash": "^4.17.11",
     "material-design-icons-iconfont": "^5.0.1",
     "node-json-config": "^0.0.5",
-    "nuxt": "^2.8.0",
-    "ts-node": "^8.2.0"
+    "nuxt": "^2.8.1",
+    "ts-node": "^8.2.0",
+    "typeface-roboto": "^0.0.54"
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.7.1",
-    "@types/node": "^12.0.3",
+    "@types/node": "^12.0.8",
     "nuxt-property-decorator": "^2.1.3"
   }
 }

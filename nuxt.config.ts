@@ -11,12 +11,10 @@ const config: NuxtConfiguration = {
       { hid: "description", name: "description", content: "A cute puppy that displays dashboards on your TV" }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Muli:400,700,800,900' }
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
     ]
   },
   css: [
-    'material-design-icons-iconfont/dist/material-design-icons.css',
     '~/assets/style/app.scss'
   ],
   plugins: [

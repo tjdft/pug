@@ -1,6 +1,9 @@
-// $body-font-family: 'Muli' !important;
-// $font-family: 'Muli' !important;
+// 
+$body-font-family: 'Roboto' !important;
+$font-family: 'Roboto' !important;
 
+@import 'typeface-roboto/index.css';
+@import 'material-design-icons-iconfont/dist/material-design-icons.css';
 @import '~vuetify/src/styles/main.sass';
 
 .project-item{

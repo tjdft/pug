@@ -1,7 +1,7 @@
 <template>
-  <v-dialog v-model="dialog">
-    <v-card v-if="notification" flat dark color="warning">
-      <v-img height="300" :src="`/${notification.type}.gif`"/>
+  <v-dialog v-model="dialog" fullscreen>
+    <v-card v-if="notification" flat dark color="error">
+      <v-img height="500" :src="`/${notification.type}.gif`"/>
       <v-card-text
         class="text-xs-center display-3 font-weight-black pa-5"
       >{{ notification.message }}</v-card-text>

@@ -1,6 +1,6 @@
 <template>
   <div class="project-item" :class="color">
-    <v-icon>bug_report</v-icon>
+    <v-icon>toys</v-icon>
     {{ issues !== null ? issues : "" }}
   </div>
 </template>
@@ -13,10 +13,10 @@ export default class SmaxIssues extends Vue {
 
   get color() {
     if (this.issues === null) {
-      return 'grey'
+      return "grey";
     }
 
-    return this.issues === 0 ? 'success' : 'error'
+    return this.issues === 0 ? "success" : "error";
   }
 }
 </script>
