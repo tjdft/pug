@@ -8,19 +8,19 @@
     <v-card-text class="text-xs-center pt-3 mt-3">
       <v-layout row wrap class="project-metrics">
         <v-flex class="pa-0">
-          <smax-issues :issues="project.metrics.smax.issues" />
+          <smax-bugs :bugs="project.metrics.smax.bugs"/>
         </v-flex>
         <v-flex class="pa-0">
-          <smax-features :features="project.metrics.smax.features" />
+          <smax-issues :issues="project.metrics.smax.issues"/>
         </v-flex>
         <v-flex class="pa-0">
-          <sentry-issues :issues="project.metrics.sentry.issues" />
+          <sentry-issues :issues="project.metrics.sentry.issues"/>
         </v-flex>
         <v-flex class="pa-0">
-          <sonar-issues :issues="project.metrics.sonar.issues" />
+          <sonar-issues :issues="project.metrics.sonar.issues"/>
         </v-flex>
         <v-flex class="pa-0">
-          <sonar-coverage :coverage="project.metrics.sonar.coverage" />
+          <sonar-coverage :coverage="project.metrics.sonar.coverage"/>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -33,16 +33,19 @@ import Notification from "~/models/Notification";
 
 @Component({
   components: {
-    SonarIssues: () => import("~/components/project/metrics/sonar/SonarIssues.vue"),
-    SonarCoverage: () => import("~/components/project/metrics/sonar/SonarCoverage.vue"),
-    SentryIssues: () => import("~/components/project/metrics/sentry/SentryIssues.vue"),
-    SmaxIssues: () => import("~/components/project/metrics/smax/SmaxIssues.vue"),
-    SmaxFeatures: () => import("~/components/project/metrics/smax/SmaxFeatures.vue")
+    SonarIssues: () =>
+      import("~/components/project/metrics/sonar/SonarIssues.vue"),
+    SonarCoverage: () =>
+      import("~/components/project/metrics/sonar/SonarCoverage.vue"),
+    SentryIssues: () =>
+      import("~/components/project/metrics/sentry/SentryIssues.vue"),
+    SmaxBugs: () => import("~/components/project/metrics/smax/SmaxBugs.vue"),
+    SmaxIssues: () => import("~/components/project/metrics/smax/SmaxIssues.vue")
   }
 })
 export default class ProjectCard extends Vue {
   @Prop() project!: Project;
-  pooling: any
+  pooling: any;
 
   mounted() {
     let refreshInterval: any = process.env["REFRESH_INTERVAL"] || 20000;
@@ -54,28 +57,34 @@ export default class ProjectCard extends Vue {
     }, refreshInterval);
   }
 
-  @Watch('project.metrics.smax.issues', { deep: true })
-  watchIssues(newVal, oldVal) {
+  @Watch("project.metrics.smax.bugs", { deep: true })
+  watchBugs(newVal, oldVal) {
     if (oldVal === null || newVal <= oldVal || newVal === 0) {
-      return
+      return;
     }
 
-    let notification = new Notification(`${this.project.name} has a new issue!`, 'issue')
-    this.$emit('newNotification', notification)
+    let notification = new Notification(
+      `${this.project.name} has a new bug!`,
+      "bug"
+    );
+    this.$emit("newNotification", notification);
   }
 
-  @Watch('project.metrics.smax.features', { deep: true })
-  watchFeatures(newVal, oldVal) {
+  @Watch("project.metrics.smax.issues", { deep: true })
+  watchIssues(newVal, oldVal) {
     if (oldVal === null || newVal <= oldVal || newVal === 0) {
-      return
+      return;
     }
 
-    let notification = new Notification(`${this.project.name} has a new feature request!`, 'feature')
-    this.$emit('newNotification', notification)
+    let notification = new Notification(
+      `${this.project.name} has a new issue!`,
+      "issue"
+    );
+    this.$emit("newNotification", notification);
   }
 
   beforeDestroy() {
-    clearInterval(this.pooling)
+    clearInterval(this.pooling);
   }
 }
 </script>

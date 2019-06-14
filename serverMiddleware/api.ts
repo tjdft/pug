@@ -35,7 +35,8 @@ app.get('/smax*', async (req, res) => {
         })
 
         // TODO
-        const token = (response.data && response.data.length === 1580 /** PROD 1516 */) ? response.data : ''
+        const tokenLenght = process.env.NODE_ENV === 'production' ? 1516 : 1580
+        const token = (response.data && response.data.length === tokenLenght) ? response.data : ''
         const url = process.env.SMAX_URL + req.url.replace('/smax', "") + `&TENANTID=${process.env.SMAX_TENANTID}`
 
         response = await axios.get(url, {

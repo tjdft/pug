@@ -12,11 +12,13 @@
                             "sisarq-frontend"
                         ],
                         "smax": {
-                            "service": 35063,
+                            "services": [
+                                35063
+                            ],
                             "groups": [
                                 73185
                             ],
-                            "issues": [
+                            "bugs": [
                                 34629
                             ]
                         }
@@ -34,11 +36,14 @@
                             "ceman-service"
                         ],
                         "smax": {
-                            "service": 33212,
+                            "services": [
+                                33212,
+                                81118
+                            ],
                             "groups": [
                                 73185
                             ],
-                            "issues": [
+                            "bugs": [
                                 34629
                             ]
                         }
@@ -56,11 +61,13 @@
                             "conciliacao-service"
                         ],
                         "smax": {
-                            "service": 75231,
+                            "services": [
+                                75231
+                            ],
                             "groups": [
                                 73185
                             ],
-                            "issues": [
+                            "bugs": [
                                 34629
                             ]
                         }
@@ -74,11 +81,14 @@
                             "br.jus.tjdft.bnmp2:bnmp2"
                         ],
                         "smax": {
-                            "service": 58869,
+                            "services": [
+                                58869,
+                                80726
+                            ],
                             "groups": [
                                 73185
                             ],
-                            "issues": [
+                            "bugs": [
                                 34629
                             ]
                         }
@@ -102,11 +112,13 @@
                             "pesquisadje-service"
                         ],
                         "smax": {
-                            "service": 35067,
+                            "services": [
+                                35067
+                            ],
                             "groups": [
                                 73185
                             ],
-                            "issues": [
+                            "bugs": [
                                 34629
                             ]
                         }
