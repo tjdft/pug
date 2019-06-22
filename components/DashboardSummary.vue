@@ -6,19 +6,16 @@
         <strong>{{ dashboard.name }}</strong>
       </small>
     </v-toolbar-title>
-    <v-spacer/>
+    <v-spacer />
     <v-toolbar-items>
       <v-btn large icon color="grey darken-2" @click="$router.push('/')">
         <v-icon>home</v-icon>
       </v-btn>
-      <v-btn large icon color="grey darken-2" class="mr-3">
-        <v-icon>settings</v-icon>
-      </v-btn>
       <v-btn depressed disabled>
         <strong>BACKLOG</strong>
       </v-btn>
-      <smax-bugs :bugs="dashboard.totalOf('smax', 'bugs')" class="px-3"/>
-      <smax-issues :issues="dashboard.totalOf('smax', 'issues')" class="px-3"/>
+      <smax-bugs :bugs="dashboard.totalOf('smax', 'bugs')" class="px-3" />
+      <smax-issues :issues="dashboard.totalOf('smax', 'issues')" class="px-3" />
     </v-toolbar-items>
   </v-app-bar>
 </template>

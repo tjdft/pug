@@ -20,7 +20,7 @@ export default class Smax extends Model {
         const services = this.project.config.smax.services.join(',')
         const bugs = this.project.config.smax.bugs
 
-        this.$axios.get(`/api/smax/rest/ems/Request?filter=(RegisteredForActualService in (${services}) and Active = true and  (ExpertGroup in (${groups})))&layout=Id,Category`)
+        this.$axios.get(`/api/smax/rest/ems/Request?filter=(RegisteredForActualService in (${services}) and Active = true and AssignedToGroup in (${groups}))&layout=Id,Category`)
             .then(response => {
                 this.bugs = response.data.entities.filter(entity => bugs.includes(parseInt(entity.properties.Category))).length
                 this.issues = response.data.entities.filter(entity => !bugs.includes(parseInt(entity.properties.Category))).length
