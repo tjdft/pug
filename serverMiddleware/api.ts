@@ -28,15 +28,13 @@ app.get('/sonar*', async (req, res) => {
 
 app.get('/smax*', async (req, res) => {
     try {
-
         let response = await axios.post(`${process.env.SMAX_URL}/auth/authentication-endpoint/authenticate/login?TENANTID=${process.env.SMAX_TENANTID}`, {
             'Login': process.env.SMAX_USER,
             'Password': process.env.SMAX_PASSWORD
         })
 
         // TODO
-        const tokenLenght = process.env.NODE_ENV === 'production' ? 1516 : 1580
-        const token = (response.data && response.data.length === tokenLenght) ? response.data : ''
+        const token = response.data
         const url = process.env.SMAX_URL + req.url.replace('/smax', "") + `&TENANTID=${process.env.SMAX_TENANTID}`
 
         response = await axios.get(url, {
